@@ -42,13 +42,12 @@ public class GivenBlackBox {
         Constructor<Course> constructor = classUnderTest.getConstructor(String.class);
         return constructor.newInstance(name);
     }
-
+    //samples from assignment 2
     Course oneStudent;
     HashMap<String, String> oneStudentExpected = new HashMap<String, String>();
-
     Course happyDayGradeBoundary;
     HashMap<String, String> happyDayGradeBoundaryExpected = new HashMap<String, String>();
-
+    //no curve tests
     Course centerBoundaryPartition_noCurve;
     HashMap<String, String> centerBoundaryPartitionExpected_noCurve = new HashMap<String, String>();
     Course edgeBoundary_noCurve;
@@ -57,20 +56,21 @@ public class GivenBlackBox {
     HashMap<String, String> extremesExpected_01_noCurve = new HashMap<String, String>();
     Course extremes_noCurve_02;
     HashMap<String, String> extremesExpected_02_noCurve = new HashMap<String, String>();
+    //curve tests
+    Course curve_5_points_edges;
+    HashMap<String, String> curve_5_points_edgesExpected = new HashMap<String, String>();
 
     @Before
     public void setUp() throws Exception {
 
+        /** Sample Tests included in assignment */
         // One Student
         // all courses should be created like this
         // Course created with two Students having
         oneStudent = createCourse("SER316");
-//        oneStudent = createCourse("CSE101");
-
         // this would be the expected result after the method countOccurencesLetterGrades is called
         oneStudent.set_points("Hanna", 50);
         oneStudentExpected.put("Hanna", "A");
-
 
         // Happy Day Case Grade Boundaries
         // Four Students mix of grades
@@ -89,76 +89,22 @@ public class GivenBlackBox {
         happyDayGradeBoundaryExpected.put(">35"  , "D");
         happyDayGradeBoundaryExpected.put("<=35" , "F");
 
-        /**Center check no curve.  Testing all middle boundaries with no curve */
-        //Center checks 1-to-1, no curve will occur due to someone getting 100
-        centerBoundaryPartition_noCurve = createCourse("SER216");
-        centerBoundaryPartition_noCurve.set_points(">100", 110); //A
-        centerBoundaryPartition_noCurve.set_points("=95", 95); //A
-        centerBoundaryPartition_noCurve.set_points("=85", 85); //B
-        centerBoundaryPartition_noCurve.set_points("=75", 75); //C
-        centerBoundaryPartition_noCurve.set_points("=65", 65); //C
-        centerBoundaryPartition_noCurve.set_points("=55", 55); //D
-        centerBoundaryPartition_noCurve.set_points("=45", 45); //D
-        centerBoundaryPartition_noCurve.set_points("=35", 35); //F
-        centerBoundaryPartition_noCurve.set_points("=25", 25); //F
-        centerBoundaryPartition_noCurve.set_points("=15", 15); //F
-        centerBoundaryPartition_noCurve.set_points("=05", 05); //F
-        //Center Boundary expectation
-        centerBoundaryPartitionExpected_noCurve.put(">100", "A");
-        centerBoundaryPartitionExpected_noCurve.put("=95", "A");
-        centerBoundaryPartitionExpected_noCurve.put("=85", "B");
-        centerBoundaryPartitionExpected_noCurve.put("=75", "C");
-        centerBoundaryPartitionExpected_noCurve.put("=65", "C");
-        centerBoundaryPartitionExpected_noCurve.put("=55", "D");
-        centerBoundaryPartitionExpected_noCurve.put("=45", "D");
-        centerBoundaryPartitionExpected_noCurve.put("=35", "F");
-        centerBoundaryPartitionExpected_noCurve.put("=25", "F");
-        centerBoundaryPartitionExpected_noCurve.put("=15", "F");
-        centerBoundaryPartitionExpected_noCurve.put("=05", "F");
+        //Assignment 2 Created test set ups
+        set_centerBoundaryPartition_noCurve();
+        set_edgeBoundary_noCurve();
+        set_extremes_noCurve_01();
+        set_extremes_noCurve_02();
+        set_curve_5_points_edges();
 
-        /**End case check no curve.  Testing edge cases with no curve */
-        edgeBoundary_noCurve = createCourse("SER215");
-        edgeBoundary_noCurve.set_points("=100", 100); //A
-        edgeBoundary_noCurve.set_points("=90", 90); //A
-        edgeBoundary_noCurve.set_points("=89", 89); //B
-        edgeBoundary_noCurve.set_points("=80", 80); //B
-        edgeBoundary_noCurve.set_points("=79", 79); //C
-        edgeBoundary_noCurve.set_points("=60", 60); //C
-        edgeBoundary_noCurve.set_points("=59", 59); //D
-        edgeBoundary_noCurve.set_points("=36", 36); //D
-        edgeBoundary_noCurve.set_points("=35", 35); //F
-        //edge boundary expectation
-        edgeBoundaryExpected_noCurve.put("=100", "A");
-        edgeBoundaryExpected_noCurve.put("=90", "A");
-        edgeBoundaryExpected_noCurve.put("=89", "B");
-        edgeBoundaryExpected_noCurve.put("=80", "B");
-        edgeBoundaryExpected_noCurve.put("=79", "C");
-        edgeBoundaryExpected_noCurve.put("=60", "C");
-        edgeBoundaryExpected_noCurve.put("=59", "D");
-        edgeBoundaryExpected_noCurve.put("=36", "D");
-        edgeBoundaryExpected_noCurve.put("=35", "F");
 
-        /** Extremes no curve test 1.  One "zero" grade.  testing curve -
-         *  Probably should be F, but will output A
-         *  */
-        extremes_noCurve_01 = createCourse("Extremes101");
-        extremes_noCurve_01.set_points("=0", 0);  //F
-        extremesExpected_01_noCurve.put("=0", "F");
 
-        /**Extremes no curve test 2.  Two grades, 100 and 0.   */
-        extremes_noCurve_02 = createCourse("Extremes102");
-        extremes_noCurve_02.set_points("=100", 100);  //A
-        extremes_noCurve_02.set_points("=0", 00);  //F
-        extremesExpected_02_noCurve.put("=100", "A");
-        extremesExpected_02_noCurve.put("=00", "F");
     }
-
-
 
     @After
     public void tearDown() throws Exception {
     }
 
+    /*Test Methods */
     @Test
     public void centerBoundaryPartition_noCurve(){
         Map<String, String> cen = centerBoundaryPartition_noCurve.curveLetterGrades();
@@ -192,6 +138,18 @@ public class GivenBlackBox {
     }
 
 
+    @Test
+    public void curve_5_points_edges(){
+        Map<String, String> edge = curve_5_points_edges.curveLetterGrades();
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+        assertTrue(edge.equals(curve_5_points_edgesExpected));
+    }
+
+
+
+
+
 
     // sample test
     @Test
@@ -210,6 +168,107 @@ public class GivenBlackBox {
             System.out.println(e.getKey() + " " + e.getValue());
         assertTrue(ans.equals(happyDayGradeBoundaryExpected));
     }
+
+
+    /* Set up Methods */
+    /**Center check no curve.  Testing all middle boundaries with no curve.
+     * Center checks 1-to-1, no curve will occur due to someone getting 100 */
+    public void set_centerBoundaryPartition_noCurve() throws Exception {
+        centerBoundaryPartition_noCurve = createCourse("SER216");
+        centerBoundaryPartition_noCurve.set_points(">100", 110); //A
+        centerBoundaryPartition_noCurve.set_points("=95", 95); //A
+        centerBoundaryPartition_noCurve.set_points("=85", 85); //B
+        centerBoundaryPartition_noCurve.set_points("=75", 75); //C
+        centerBoundaryPartition_noCurve.set_points("=65", 65); //C
+        centerBoundaryPartition_noCurve.set_points("=55", 55); //D
+        centerBoundaryPartition_noCurve.set_points("=45", 45); //D
+        centerBoundaryPartition_noCurve.set_points("=35", 35); //F
+        centerBoundaryPartition_noCurve.set_points("=25", 25); //F
+        centerBoundaryPartition_noCurve.set_points("=15", 15); //F
+        centerBoundaryPartition_noCurve.set_points("=05", 05); //F
+        //Center Boundary expectation
+        centerBoundaryPartitionExpected_noCurve.put(">100", "A");
+        centerBoundaryPartitionExpected_noCurve.put("=95", "A");
+        centerBoundaryPartitionExpected_noCurve.put("=85", "B");
+        centerBoundaryPartitionExpected_noCurve.put("=75", "C");
+        centerBoundaryPartitionExpected_noCurve.put("=65", "C");
+        centerBoundaryPartitionExpected_noCurve.put("=55", "D");
+        centerBoundaryPartitionExpected_noCurve.put("=45", "D");
+        centerBoundaryPartitionExpected_noCurve.put("=35", "F");
+        centerBoundaryPartitionExpected_noCurve.put("=25", "F");
+        centerBoundaryPartitionExpected_noCurve.put("=15", "F");
+        centerBoundaryPartitionExpected_noCurve.put("=05", "F");
+    }
+
+    /**Edge case check no curve.  Testing edge cases with no curve */
+    public void set_edgeBoundary_noCurve() throws Exception {
+        edgeBoundary_noCurve = createCourse("SER215");
+        edgeBoundary_noCurve.set_points("=100", edgeBoundary_noCurve.getMaxPoints()); //A
+        edgeBoundary_noCurve.set_points("=90", 90); //A
+        edgeBoundary_noCurve.set_points("=89", 89); //B
+        edgeBoundary_noCurve.set_points("=80", 80); //B
+        edgeBoundary_noCurve.set_points("=79", 79); //C
+        edgeBoundary_noCurve.set_points("=60", 60); //C
+        edgeBoundary_noCurve.set_points("=59", 59); //D
+        edgeBoundary_noCurve.set_points("=36", 36); //D
+        edgeBoundary_noCurve.set_points("=35", 35); //F
+        //edge boundary expectation
+        edgeBoundaryExpected_noCurve.put("=100", "A");
+        edgeBoundaryExpected_noCurve.put("=90", "A");
+        edgeBoundaryExpected_noCurve.put("=89", "B");
+        edgeBoundaryExpected_noCurve.put("=80", "B");
+        edgeBoundaryExpected_noCurve.put("=79", "C");
+        edgeBoundaryExpected_noCurve.put("=60", "C");
+        edgeBoundaryExpected_noCurve.put("=59", "D");
+        edgeBoundaryExpected_noCurve.put("=36", "D");
+        edgeBoundaryExpected_noCurve.put("=35", "F");
+
+    }
+
+    /** Extremes no curve test 1.  One "zero" grade.  testing curve -
+     *  Probably should be F, but will output A */
+    public void set_extremes_noCurve_01() throws Exception {
+        extremes_noCurve_01 = createCourse("Extremes101");
+        extremes_noCurve_01.set_points("=0", 0);  //F
+        extremesExpected_01_noCurve.put("=0", "F");
+    }
+
+    /**Extremes no curve test 2.  Two grades, 100 and 0.   */
+    public void set_extremes_noCurve_02 () throws Exception {
+        extremes_noCurve_02 = createCourse("Extremes102");
+        extremes_noCurve_02.set_points("=100", extremes_noCurve_02.getMaxPoints());  //A
+        extremes_noCurve_02.set_points("=0", 00);  //F
+        extremesExpected_02_noCurve.put("=100", "A");
+        extremesExpected_02_noCurve.put("=00", "F");
+    }
+
+    /** 5 point curve edge cases */
+    public void set_curve_5_points_edges() throws Exception {
+
+        curve_5_points_edges = createCourse("CSE101");
+        curve_5_points_edges.set_points("=95", 95); //A
+        curve_5_points_edges.set_points("=85", 85); //A
+        curve_5_points_edges.set_points("=84", 84); //B
+        curve_5_points_edges.set_points("=75", 75); //B
+        curve_5_points_edges.set_points("=74", 74); //C
+        curve_5_points_edges.set_points("=55", 55); //C
+        curve_5_points_edges.set_points("=54", 54); //D
+        curve_5_points_edges.set_points("=31", 31); //D
+        curve_5_points_edges.set_points("=30", 30); //F
+        curve_5_points_edges.set_points("=25", 25); //F
+        //expectations
+        curve_5_points_edgesExpected.put("=95", "A");
+        curve_5_points_edgesExpected.put("=85", "A");
+        curve_5_points_edgesExpected.put("=84", "B");
+        curve_5_points_edgesExpected.put("=75", "B");
+        curve_5_points_edgesExpected.put("=74", "C");
+        curve_5_points_edgesExpected.put("=55", "C");
+        curve_5_points_edgesExpected.put("=54", "D");
+        curve_5_points_edgesExpected.put("=31", "D");
+        curve_5_points_edgesExpected.put("=30", "F");
+        curve_5_points_edgesExpected.put("=25", "F");
+    }
+
 
 
 
