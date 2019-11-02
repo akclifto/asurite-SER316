@@ -1,5 +1,5 @@
 # Compiled class file
-*.class
+# *.class
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
@@ -45,7 +45,6 @@ modules.xml
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 config/
-
 
 # User-specific stuff
 .idea/
