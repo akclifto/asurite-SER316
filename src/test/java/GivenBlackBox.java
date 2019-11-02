@@ -59,6 +59,10 @@ public class GivenBlackBox {
     //curve tests
     Course curve_5_points_edges;
     HashMap<String, String> curve_5_points_edgesExpected = new HashMap<String, String>();
+    Course curve_35_points;
+    HashMap<String, String> curve_35_pointsExpected = new HashMap<String, String>();
+    Course curve_75_points;
+    HashMap<String, String> curve_75_pointsExpected = new HashMap<String, String>();
 
     @Before
     public void setUp() throws Exception {
@@ -95,7 +99,8 @@ public class GivenBlackBox {
         set_extremes_noCurve_01();
         set_extremes_noCurve_02();
         set_curve_5_points_edges();
-
+        set_curve_35_points();
+        set_curve_75_points();
 
 
     }
@@ -146,12 +151,29 @@ public class GivenBlackBox {
         assertTrue(edge.equals(curve_5_points_edgesExpected));
     }
 
+    @Test
+    public void curve_35_points_edges(){
+        Map<String, String> edge = curve_35_points.curveLetterGrades();
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+        assertTrue(edge.equals(curve_35_pointsExpected));
+    }
+
+    @Test
+    public void curve_75_points_edges(){
+        Map<String, String> edge = curve_75_points.curveLetterGrades();
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+        assertTrue(edge.equals(curve_75_pointsExpected));
+    }
 
 
 
 
 
-    // sample test
+
+
+        // sample test
     @Test
     public void oneStudent() {
         Map<String, String> ans = oneStudent.curveLetterGrades();
@@ -245,7 +267,7 @@ public class GivenBlackBox {
     /** 5 point curve edge cases */
     public void set_curve_5_points_edges() throws Exception {
 
-        curve_5_points_edges = createCourse("CSE101");
+        curve_5_points_edges = createCourse("CS101");
         curve_5_points_edges.set_points("=95", 95); //A
         curve_5_points_edges.set_points("=85", 85); //A
         curve_5_points_edges.set_points("=84", 84); //B
@@ -269,7 +291,42 @@ public class GivenBlackBox {
         curve_5_points_edgesExpected.put("=25", "F");
     }
 
+    /** 35 point curve test.  Scores out of order */
+    public void set_curve_35_points() throws Exception {
+        curve_35_points = createCourse("CS102");
+        curve_35_points.set_points("=65", 65); //A
+        curve_35_points.set_points("=55", 55); //A
+        curve_35_points.set_points("=54", 54); //B
+        curve_35_points.set_points("=25", 25); //C
+        curve_35_points.set_points("=7", 7);   //D
+        curve_35_points.set_points("=15", 15); //D
+//        curve_35_points.set_points("=0", 0); //F
+        //expectations
+        curve_35_pointsExpected.put("65", "A");
+        curve_35_pointsExpected.put("55", "A");
+        curve_35_pointsExpected.put("54", "B");
+        curve_35_pointsExpected.put("25", "C");
+        curve_35_pointsExpected.put("7", "D");
+        curve_35_pointsExpected.put("15",  "D");
+//        curve_35_pointsExpected.put("0",  "F");
+    }
 
+    /** 75 point curve test */
+    public void set_curve_75_points() throws Exception {
+        curve_75_points = createCourse("CS103");
+        curve_75_points.set_points("=25", 65); //A
+        curve_75_points.set_points("=15", 75); //A
+        curve_75_points.set_points("=14", 54); //B
+        curve_75_points.set_points("=05", 55); //B
+        curve_75_points.set_points("=0", 7);   //C
+        //expectations
+        curve_75_pointsExpected.put("25", "A");
+        curve_75_pointsExpected.put("15", "A");
+        curve_75_pointsExpected.put("14", "B");
+        curve_75_pointsExpected.put("05", "B");
+        curve_75_pointsExpected.put("0", "C");
+
+    }
 
 
 }
