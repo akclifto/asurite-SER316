@@ -102,6 +102,8 @@ public class GivenBlackBox {
         happyDayGradeBoundaryExpected.put(">35"  , "D");
         happyDayGradeBoundaryExpected.put("<=35" , "F");
 
+        /* End of sample tests*/
+
         //Assignment 2 Created test set ups
         set_centerBoundaryPartition_noCurve();
         set_edgeBoundary_noCurve();
@@ -316,9 +318,9 @@ public class GivenBlackBox {
     public void set_extremes_noCurve_02 () throws Exception {
         extremes_noCurve_02 = createCourse("Extremes102");
         extremes_noCurve_02.set_points("=100", extremes_noCurve_02.getMaxPoints());  //A
-        extremes_noCurve_02.set_points("=0" , 00);  //F
+        extremes_noCurve_02.set_points("=0" , 0);  //F
         extremesExpected_02_noCurve.put("=100", "A");
-        extremesExpected_02_noCurve.put("=00" , "F");
+        extremesExpected_02_noCurve.put("=0" , "F");
     }
 
     /** 5 point curve edge cases */
@@ -424,7 +426,6 @@ public class GivenBlackBox {
             curve_same_names_scores.set_points("Adam", 44);
             curve_same_names_scores.set_points("Adam", 44);
             //Expectations
-            curve_same_names_scoresExpected.put("Adam", "A");
             curve_same_names_scoresExpected.put("Adam", "A");
             curve_same_names_scoresExpected.put("Adam", "A");
             curve_same_names_scoresExpected.put("Adam", "A");
