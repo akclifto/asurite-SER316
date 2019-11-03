@@ -68,6 +68,10 @@ public class GivenBlackBox {
     HashMap<String, String> curve_15_points_multiExpected = new HashMap<String, String>();
     Course curve_same_names_scores;
     HashMap<String, String> curve_same_names_scoresExpected = new HashMap<String, String>();
+    Course negative_scores;
+    HashMap<String, String> negative_scoresExpected = new HashMap<String, String>();
+    Course extremeNegative_scores;
+    HashMap<String, String> extremeNegative_scoresExpected = new HashMap<String, String>();
 
     @Before
     public void setUp() throws Exception {
@@ -108,6 +112,8 @@ public class GivenBlackBox {
         set_curve_35_points();
         set_curve_75_points();
         set_curve_same_names_scores();
+        set_negative_scores();
+        set_extremeNegative_scores();
 
     }
 
@@ -199,6 +205,27 @@ public class GivenBlackBox {
         assertTrue(edge.equals(curve_same_names_scoresExpected));
     }
 
+    @Test
+    public void negative_scores(){
+        System.out.println("Starting negative scores test: ");
+        Map<String, String> edge = negative_scores.curveLetterGrades();
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+        assertTrue(edge.equals(negative_scoresExpected));
+    }
+
+    @Test
+    public void extremeNegative_scores(){
+        System.out.println("Starting extreme negative scores test: ");
+        Map<String, String> edge = extremeNegative_scores.curveLetterGrades();
+        System.out.println("John's Points: " + extremeNegative_scores.getStudent_Points("John"));
+        System.out.println("Sara's Points: " + extremeNegative_scores.getStudent_Points("Sara"));
+        System.out.println("Tammie's Points: " + extremeNegative_scores.getStudent_Points("Tammie"));
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+
+        assertTrue(edge.equals(extremeNegative_scoresExpected));
+    }
 
 
 
@@ -406,9 +433,33 @@ public class GivenBlackBox {
             curve_same_names_scoresExpected.put("Adam", "D");
             curve_same_names_scoresExpected.put("Adam", "D");
             curve_same_names_scoresExpected.put("Adam", "D");
-
-
         }
 
+        /**Test negative score input with curve */
+        public void set_negative_scores() throws Exception {
+            negative_scores = createCourse("CS301");
+            negative_scores.set_points("John", 50);
+            negative_scores.set_points("<0", -1);
+            negative_scores.set_points("<-10", -20);
+            negative_scores.set_points("<-50", -60);
+            //expected
+            negative_scoresExpected.put("John", "A");
+            negative_scoresExpected.put("<0", "F");
+            negative_scoresExpected.put("<-10", "F");
+            negative_scoresExpected.put("<-50", "F");
+        }
+
+        /**Tests extreme negative only cases. */
+        public void set_extremeNegative_scores() throws Exception {
+            extremeNegative_scores =  createCourse("CS302");
+            extremeNegative_scores.set_points("John", -80);
+            extremeNegative_scores.set_points("Sara", -95);
+            extremeNegative_scores.set_points("Tammie", -55);
+
+            //expected
+            extremeNegative_scoresExpected.put("John", "F");
+            extremeNegative_scoresExpected.put("Sara", "F");
+            extremeNegative_scoresExpected.put("Tammie", "F");
+        }
 
 }
