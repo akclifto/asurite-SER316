@@ -453,9 +453,9 @@ public class GivenBlackBox {
         /**Tests extreme negative only cases. */
         public void set_extremeNegative_scores() throws Exception {
             extremeNegative_scores =  createCourse("CS302");
-            extremeNegative_scores.set_points("John", -80);
+            extremeNegative_scores.set_points("John", -180);
             extremeNegative_scores.set_points("Sara", -95);
-            extremeNegative_scores.set_points("Tammie", -55);
+            extremeNegative_scores.set_points("Tammie", -80);
 
             //expected
             extremeNegative_scoresExpected.put("John", "F");
