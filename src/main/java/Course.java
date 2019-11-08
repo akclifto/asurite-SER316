@@ -36,7 +36,36 @@ public class Course {
     public void SetName(String name) {
         this.Name = name;
     }
+	
+	public int getMaxPoints() {
+        return maxPoints;
+    }
 
+    public void setMaxPoints(int maxPoints) {
+        this.maxPoints = maxPoints;
+    }
+	
+	public ArrayList<Student> getStudents(){
+        return students;
+    }
+	
+	public void set_points(String name, int points) {
+        if(!this.points.containsKey(name))
+            addStudent(new Student(name, null));
+        this.points.put(name, points);
+    }
+
+    public HashMap<String, Integer> getPoints(){
+        return points;
+    }
+	
+	public int getStudent_Points(String student) {
+        return points.get(student);
+    }
+
+    public int getStudent_Points(Student student) {
+        return points.get(student.getAsurite());
+    }
 
     public void printCourseStats() {
         ArrayList<Integer> values = new ArrayList<Integer>(points.values());
@@ -44,7 +73,6 @@ public class Course {
         System.out.print("Average Grades without max and without min: ");
         System.out.println(this.calculateAverageWithoutMinWithoutMax());
     }
-
 
     public double calculateAverageWithoutMinWithoutMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
@@ -96,37 +124,6 @@ public class Course {
             return students.add(s);
         }
         return false;
-    }
-
-    public void set_points(String name, int points) {
-        if(!this.points.containsKey(name))
-            addStudent(new Student(name, null));
-        this.points.put(name, points);
-    }
-
-    public HashMap<String, Integer> getPoints(){
-        return points;
-    }
-
-    public int getStudent_Points(String student) {
-        return points.get(student);
-    }
-
-    public int getStudent_Points(Student student) {
-        return points.get(student.getAsurite());
-    }
-
-    public int getMaxPoints() {
-        return maxPoints;
-    }
-
-    public void setMaxPoints(int maxPoints) {
-        this.maxPoints = maxPoints;
-    }
-
-
-    public ArrayList<Student> getStudents(){
-        return students;
     }
 
     public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) throws NullPointerException{
