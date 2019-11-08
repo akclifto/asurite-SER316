@@ -1,5 +1,3 @@
-Code Review Defect List
-
 **Reviewer:**  Adam Clifton (akclifto)  | **GH Repo:** [**https://github.com/akclifto/asurite-SER316/tree/Review**](https://github.com/akclifto/asurite-SER316/tree/Review)
 
 | ID # | Location (File and Line Number) | Problem Description  | Category | Severity |
