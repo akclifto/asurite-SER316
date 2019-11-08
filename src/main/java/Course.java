@@ -13,12 +13,11 @@ import java.util.Map;
 
 
 public class Course {
-
-    public HashMap<String, Integer> points = new HashMap<>(); // maps student names (asurite) to their points
+    
     private String Name; // course name
     private int maxPoints;
     private ArrayList<Student> students  = new ArrayList<Student>();
-
+    private HashMap<String, Integer> points = new HashMap<>(); // maps student names (asurite) to their points
 
     public Course(String name) {
         this(name, 100);
