@@ -45,13 +45,14 @@ public class Course {
         this.maxPoints = maxPoints;
     }
 	
-	public ArrayList<Student> getStudents(){
+    public ArrayList<Student> getStudents(){
         return students;
     }
 	
-	public void set_points(String name, int points) {
-        if(!this.points.containsKey(name))
+    public void set_points(String name, int points) {
+        if(!this.points.containsKey(name)){
             addStudent(new Student(name, null));
+	}
         this.points.put(name, points);
     }
 
@@ -59,7 +60,7 @@ public class Course {
         return points;
     }
 	
-	public int getStudent_Points(String student) {
+    public int getStudent_Points(String student) {
         return points.get(student);
     }
 
@@ -80,8 +81,10 @@ public class Course {
         int counter = 0;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        if(collection.size() == 1)
+		
+        if(collection.size() == 1){
             return collection.get(0);
+		}
 
         else if(collection.size() == 2 ){
             return (double)(collection.get(0) + collection.get(1))/2;
