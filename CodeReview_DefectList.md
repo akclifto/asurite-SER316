@@ -13,7 +13,7 @@
 | 09 | Course.java, 17 | Public attributes  | CG 5 | MJ |
 | 10 | Course.java, 18, 32, and 36 | Attribute, Parameter, Method names not in lower camelCase  | CG 4c | LOW |
 | 11 | Course.java, 93 | Attribute not listed with the rest of the attributes and public  | CG 7 | MJ |
-| 12  | Course.java, 93 | No setter method for private attribute | FD | BR |
+| 12  | Course.java, 257 | Method not set, returns null| FD | BR |
 | 13 | Course.java, 41, 49, and 94 | Methods listed out of preferred order, (non-setter/getter methods before setters/getters)  | CG 7c-d | LOW |
 | 14 | Course.java, 49 | Method name too long  | CS 10 | LOW |
 | 15 | Course.java, 103 | Coding style, no brackets { } for if-statements  | CG 8c | LOW |
