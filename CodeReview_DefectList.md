@@ -1,11 +1,9 @@
 Code Review Defect List
 
-| Reviewer: Adam Clifton (akclifto) | GH Repo: [**https://github.com/akclifto/asurite-SER316/tree/Review**](https://github.com/akclifto/asurite-SER316/tree/Review) |   |
-| --- | --- | --- |
-|   |   |   |  
-|   |   |   |
-| ID # | Location | Problem Description | Problem |
-| File and Line Number | Category | Severity |
+**Reviewer:**  Adam Clifton (akclifto)  | **GH Repo:** [**https://github.com/akclifto/asurite-SER316/tree/Review**](https://github.com/akclifto/asurite-SER316/tree/Review)
+
+| ID # | Location (File and Line Number) | Problem Description  | Category | Severity |
+| --- | --- | --- | --- | --- |
 | 01 | Main.java, all | No banner information of any kind  | CG 1-3 | LOW |
 | 02 | Major.java, all | No banner information of any kind  | CG 1-3 | LOW |
 | 03 | Major.java, 3 | Lazy class, only contains constructor, possibly lacks needed majors  | CS 5 | LOW |
