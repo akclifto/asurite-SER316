@@ -17,7 +17,8 @@
 | 13 | Course.java, 41, 49, and 94 | Methods listed out of preferred order, (non-setter/getter methods before setters/getters)  | CG 7c-d | LOW |
 | 14 | Course.java, 49 | Method name too long  | CS 10 | LOW |
 | 15 | Course.java, 103 | Coding style, no brackets { } for if-statements  | CG 8c | LOW |
-| 16 |    |   |   |   |
+| 16 | Course.java, 62  | Duplicate code, to getter methods the return the same thing and may be redundant   |CS 1    |LOW   |
+| 17 |  |   |   |   |
 
 Category:        **CS –** Code Smell defect **. CG –** Violation of a coding guideline. Provide the guideline number. **FD** – Functional defect. Code will not produce the expected result. **MD –** Miscellaneous defect, for all other defects.
 
