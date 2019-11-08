@@ -4,8 +4,7 @@ Code Review Defect List
 | --- | --- | --- |
 |   |   |   |
 |   |   |   |
-| ID # | Location | Problem Description | Problem |
-| File and Line Number | Category | Severity |
+| ID # | Location | Problem Description | Problem | File and Line Number | Category | Severity |
 | 01 | Main.java, all | No banner information of any kind  | CG 1-3 | LOW |
 | 02 | Major.java, all | No banner information of any kind  | CG 1-3 | LOW |
 | 03 | Major.java, 3 | Lazy class, only contains constructor, possibly lacks needed majors  | CS 5 | LOW |
