@@ -17,6 +17,7 @@ public class Course {
     public HashMap<String, Integer> points = new HashMap<>(); // maps student names (asurite) to their points
     private String Name; // course name
     private int maxPoints;
+    private ArrayList<Student> students  = new ArrayList<Student>();
 
 
     public Course(String name) {
@@ -90,7 +91,6 @@ public class Course {
 
     // REACH at least 95% Code coverage  (assign 3)
     // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
-    ArrayList<Student> students  = new ArrayList<Student>();
     public boolean addStudent(Student s) {
         if(students != null && points.putIfAbsent(s.getAsurite(), -1) == null){
             students.add(s);
