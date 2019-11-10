@@ -259,22 +259,29 @@ public class Course {
         curve.put(null, "D");
         curve.put(null, "F");
 
-        ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
-        //TODO the actual curving, iterate through points, find largest value, curve points off largest value, return
+        ArrayList<Integer> collection = new ArrayList<Integer>(points.values());\
+        int max = collection.get(0);
 
         if (collection.isEmpty()) {
             throw new NullPointerException();
         }
 
+        for(int i = 0; i < collection.size(); i++){
+            if(collection.get(i) > max) {
+                max = collection.get(i);
+            }
+        }
+        int curveAdded = maxPoints - max;
+        int id = 0;
+        
         for (double value : collection) {
-            int id = 0;
-            if ((double) value / maxPoints * 100 > 89.0) {
+            if (((double) value / maxPoints * 100) + curveAdded > 89.0) {
                 curve.put(students.get(id).getAsurite() + 1 + ": ", "A");
-            } else if ((double) value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
+            } else if (((double) value / maxPoints * 100) + curveAdded > 80.0 && value / maxPoints <= 89.0) {
                 curve.put(students.get(++id).getAsurite() + ": ", "B");
-            } else if ((double) value / maxPoints * 100 > 59.0 && value / maxPoints <= 79.0) {
+            } else if (((double) value / maxPoints * 100) + curveAdded > 59.0 && value / maxPoints <= 79.0) {
                 curve.put(students.get(++id).getAsurite() + ": ", "C");
-            } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 59.0) {
+            } else if (((double) value / maxPoints * 100) + curveAdded > 35.0 && value / maxPoints <= 59.0) {
                 curve.put(students.get(++id).getAsurite() + ": ", "D");
             } else {
                 curve.put(students.get(++id).getAsurite() + ": ", "F");
