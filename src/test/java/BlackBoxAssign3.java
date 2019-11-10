@@ -70,10 +70,10 @@ public class BlackBoxAssign3 {
         Map<String, String> ans = courseUnderTest.curveLetterGrades();
         for(Map.Entry<String, String> e : ans.entrySet())
             System.out.println(e.getKey() + " " + e.getValue());
-        assertTrue(ans.equals(courseUnderTestExpected));
+        assertTrue(ans.equals(courseUnderTestExpected));git sa
     }
 
-    /*Assign 2 Test Methods */
+    /*Assign2 Test Methods */
     @Test
     public void centerBoundaryPartition_noCurve() throws IOException {
         System.out.println("Starting center boundary partition noCurve test: ");
