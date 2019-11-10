@@ -263,13 +263,17 @@ public class Course {
             throw new NullPointerException();
         }
 
-        for(int i = 0; i < collection.size(); i++){
-            if(collection.get(i) < 0){
+        for (int i = 0; i < collection.size(); i++) {
+            if (collection.get(i) < 0) {
                 throw new IOException("Negative grades were detected. Fix inputs and retry.");
             }
-            if(collection.get(i) > max) {
+
+            if (collection.get(i) > max) {
                 max = collection.get(i);
             }
+        }
+        if(max > 100){
+            max = 100;
         }
         int curveAdded = maxPoints - max;
         System.out.println("The curve will be: " + curveAdded + "pts.");
@@ -281,7 +285,7 @@ public class Course {
                         curve.put(students.get(i).getAsurite() + ": ", "A");
                     }
                 }
-            } else if ((((double) value / maxPoints * 100) + curveAdded) > 80.0 &&
+            } else if ((((double) value / maxPoints * 100) + curveAdded) > 79.0 &&
                     ((value / maxPoints) + curveAdded) <= 89.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
@@ -289,7 +293,7 @@ public class Course {
                     }
                 }
             } else if ((((double) value / maxPoints * 100) + curveAdded) > 59.0 &&
-                    ((value / maxPoints) + curveAdded) <= 79.0) {
+                    ((value / maxPoints) + curveAdded) < 80.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
                         curve.put(students.get(i).getAsurite() + ": ", "C");
