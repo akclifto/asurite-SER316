@@ -267,17 +267,17 @@ public class Course {
         }
 
         for (double value : collection) {
+            int id = 0;
             if ((double) value / maxPoints * 100 > 89.0) {
-                curve.put(students.get(0).getAsurite() + 1 + ": ", "A");
-                curve.put("A", curve.get("A") + 1);
+                curve.put(students.get(id).getAsurite() + 1 + ": ", "A");
             } else if ((double) value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
-                curve.put("B", curve.get("B") + 1);
+                curve.put(students.get(++id).getAsurite() + ": ", "B");
             } else if ((double) value / maxPoints * 100 > 59.0 && value / maxPoints <= 79.0) {
-                curve.put("C", curve.get("C") + 1);
+                curve.put(students.get(++id).getAsurite() + ": ", "C");
             } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 59.0) {
-                curve.put("D", curve.get("D") + 1);
+                curve.put(students.get(++id).getAsurite() + ": ", "D");
             } else {
-                curve.put("F", curve.get("F") + 1);
+                curve.put(students.get(++id).getAsurite() + ": ", "F");
             }
         }
         return curve; //implement me in assign 3 (not in assign 2)
