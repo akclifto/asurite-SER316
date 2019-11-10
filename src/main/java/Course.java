@@ -4,6 +4,7 @@ package main.java;
  * class for managing course statistics
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -192,7 +193,7 @@ public class Course {
      * @return hashmap with final letter grades for students based on curving `points`.
      * @throws NullPointerException
      */
-    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved) throws NullPointerException{
+    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved) throws NullPointerException, IOException {
         HashMap<String, Integer> occur = new HashMap<String, Integer>();
         occur.put("A", 0);
         occur.put("B", 0);
@@ -207,13 +208,13 @@ public class Course {
             }
 
             for (double value : collection) {
-                if ((double)value/maxPoints*100 > 89.0) {
+                if ((double)value/maxPoints * 100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
                 } else if ((double)value/maxPoints * 100 > 80.0 && value/maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
                 } else if ((double)value/maxPoints * 100 > 50.0 && value/maxPoints <= 65) {
                     occur.put("C", occur.get("C") + 1);
-                } else if ((double)value/maxPoints*100 > 35.0 && value/maxPoints <= 50.0) {
+                } else if ((double)value/maxPoints * 100 > 35.0 && value/maxPoints <= 50.0) {
                     occur.put("D", occur.get("D") + 1);
                 } else {
                     occur.put("F", occur.get("F") + 1);
@@ -250,16 +251,12 @@ public class Course {
      * @return hashmap with final letter grades for students based on curving `points`.
      * @throws NullPointerException
      */
-    public Map<String, String> curveLetterGrades() throws NullPointerException { //TODO verify no side effect with points.
+    public Map<String, String> curveLetterGrades() throws NullPointerException, IOException { //TODO verify no side effect with points.
 
         HashMap<String, String> curve = new HashMap<>();
-        curve.put(null, "A");
-        curve.put(null, "B");
-        curve.put(null, "C");
-        curve.put(null, "D");
-        curve.put(null, "F");
 
-        ArrayList<Integer> collection = new ArrayList<Integer>(points.values());\
+
+        ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
         int max = collection.get(0);
 
         if (collection.isEmpty()) {
@@ -267,27 +264,53 @@ public class Course {
         }
 
         for(int i = 0; i < collection.size(); i++){
+            if(collection.get(i) < 0){
+                throw new IOException("Negative grades were detected. Fix inputs and retry.");
+            }
             if(collection.get(i) > max) {
                 max = collection.get(i);
             }
         }
         int curveAdded = maxPoints - max;
-        int id = 0;
-        
+        System.out.println("The curve will be: " + curveAdded + "pts.");
+
         for (double value : collection) {
-            if (((double) value / maxPoints * 100) + curveAdded > 89.0) {
-                curve.put(students.get(id).getAsurite() + 1 + ": ", "A");
-            } else if (((double) value / maxPoints * 100) + curveAdded > 80.0 && value / maxPoints <= 89.0) {
-                curve.put(students.get(++id).getAsurite() + ": ", "B");
-            } else if (((double) value / maxPoints * 100) + curveAdded > 59.0 && value / maxPoints <= 79.0) {
-                curve.put(students.get(++id).getAsurite() + ": ", "C");
-            } else if (((double) value / maxPoints * 100) + curveAdded > 35.0 && value / maxPoints <= 59.0) {
-                curve.put(students.get(++id).getAsurite() + ": ", "D");
+            if ((((double) value / maxPoints * 100) + curveAdded) > 89.0) {
+                for (int i = 0; i < students.size(); i++) {
+                    if (getStudent_Points(students.get(i)) == value) {
+                        curve.put(students.get(i).getAsurite() + ": ", "A");
+                    }
+                }
+            } else if ((((double) value / maxPoints * 100) + curveAdded) > 80.0 &&
+                    ((value / maxPoints) + curveAdded) <= 89.0) {
+                for (int i = 0; i < students.size(); i++) {
+                    if (getStudent_Points(students.get(i)) == value) {
+                        curve.put(students.get(i).getAsurite() + ": ", "B");
+                    }
+                }
+            } else if ((((double) value / maxPoints * 100) + curveAdded) > 59.0 &&
+                    ((value / maxPoints) + curveAdded) <= 79.0) {
+                for (int i = 0; i < students.size(); i++) {
+                    if (getStudent_Points(students.get(i)) == value) {
+                        curve.put(students.get(i).getAsurite() + ": ", "C");
+                    }
+                }
+            } else if ((((double) value / maxPoints * 100) + curveAdded) > 35.0 &&
+                    ((value / maxPoints) + curveAdded) <= 59.0) {
+                for (int i = 0; i < students.size(); i++) {
+                    if (getStudent_Points(students.get(i)) == value) {
+                        curve.put(students.get(i).getAsurite() + ": ", "D");
+                    }
+                }
             } else {
-                curve.put(students.get(++id).getAsurite() + ": ", "F");
+                for (int i = 0; i < students.size(); i++) {
+                    if (getStudent_Points(students.get(i)) == value) {
+                        curve.put(students.get(i).getAsurite() + ": ", "F");
+                    }
+                }
             }
         }
-        return curve; //implement me in assign 3 (not in assign 2)
+        return curve;
     }
 
 }

@@ -4,6 +4,7 @@ import main.java.Student;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertTrue;
@@ -17,7 +18,7 @@ public class GivenWhiteBox {
 
 
     @Test
-    public void noCurvingTwoStudents() {
+    public void noCurvingTwoStudents() throws IOException {
         // One Student
         oneStudent = new Course("SER316");
         oneStudent.set_points("Hanna", 85);
