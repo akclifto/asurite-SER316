@@ -251,6 +251,10 @@ public class Course {
      * @throws NullPointerException
      */
     public Map<String, String> curveLetterGrades() throws NullPointerException { //TODO verify no side effect with points.
+
+        HashMap<String, Integer> curve = new HashMap<>();
+
+
         return null; //implement me in assign 3 (not in assign 2)
     }
 
