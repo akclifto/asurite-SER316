@@ -252,14 +252,35 @@ public class Course {
      */
     public Map<String, String> curveLetterGrades() throws NullPointerException { //TODO verify no side effect with points.
 
-        HashMap<String, Integer> curve = new HashMap<>();
+        HashMap<String, String> curve = new HashMap<>();
+        curve.put(null, "A");
+        curve.put(null, "B");
+        curve.put(null, "C");
+        curve.put(null, "D");
+        curve.put(null, "F");
 
+        ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
+        //TODO the actual curving, iterate through points, find largest value, curve points off largest value, return
 
-        return null; //implement me in assign 3 (not in assign 2)
+        if (collection.isEmpty()) {
+            throw new NullPointerException();
+        }
+
+        for (double value : collection) {
+            if ((double) value / maxPoints * 100 > 89.0) {
+                curve.put(students.get(0).getAsurite() + 1 + ": ", "A");
+                curve.put("A", curve.get("A") + 1);
+            } else if ((double) value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
+                curve.put("B", curve.get("B") + 1);
+            } else if ((double) value / maxPoints * 100 > 59.0 && value / maxPoints <= 79.0) {
+                curve.put("C", curve.get("C") + 1);
+            } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 59.0) {
+                curve.put("D", curve.get("D") + 1);
+            } else {
+                curve.put("F", curve.get("F") + 1);
+            }
+        }
+        return curve; //implement me in assign 3 (not in assign 2)
     }
-
-
-
-
 
 }
