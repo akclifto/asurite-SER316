@@ -1,7 +1,9 @@
 import main.java.Course;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,6 +41,8 @@ public class BlackBoxAssign3 {
     Course extremeNegative_scores;
     HashMap<String, String> extremeNegative_scoresExpected = new HashMap<String, String>();
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -54,8 +58,8 @@ public class BlackBoxAssign3 {
         set_curve_15_points_multi();
         set_curve_35_points();
         set_curve_75_points();
-//        set_negative_scores();
-//        set_extremeNegative_scores();
+        set_negative_scores();
+        set_extremeNegative_scores();
 
     }
 
@@ -150,27 +154,34 @@ public class BlackBoxAssign3 {
 
     /**These tests will fail. They are designed to never pass because they throw a
      * negative score input IOException. */
-//    @Test
-//    public void negative_scores() throws IOException {
-//        System.out.println("Starting negative scores test: ");
-//        Map<String, String> edge = negative_scores.curveLetterGrades();
-//        for(Map.Entry<String, String> e : edge.entrySet())
-//            System.out.println(e.getKey() + " " + e.getValue());
-//        assertTrue(edge.equals(negative_scoresExpected));
-//    }
-//
-//    @Test
-//    public void extremeNegative_scores() throws IOException {
-//        System.out.println("Starting extreme negative scores test: ");
-//        Map<String, String> edge = extremeNegative_scores.curveLetterGrades();
-//        System.out.println("John's Points: " + extremeNegative_scores.getStudent_Points("John"));
-//        System.out.println("Sara's Points: " + extremeNegative_scores.getStudent_Points("Sara"));
-//        System.out.println("Tammie's Points: " + extremeNegative_scores.getStudent_Points("Tammie"));
-//        for(Map.Entry<String, String> e : edge.entrySet())
-//            System.out.println(e.getKey() + " " + e.getValue());
-//
-//        assertTrue(edge.equals(extremeNegative_scoresExpected));
-//    }
+    @Test
+    public void negative_scores() throws IOException {
+
+        exception.expect(IOException.class);
+        exception.expectMessage("Negative grades were detected. Fix inputs and retry.");
+
+        System.out.println("Starting negative scores test: ");
+        Map<String, String> edge = negative_scores.curveLetterGrades();
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+    }
+
+    @Test
+    public void extremeNegative_scores() throws IOException {
+
+        exception.expect(IOException.class);
+        exception.expectMessage("Negative grades were detected. Fix inputs and retry.");
+
+        System.out.println("Starting extreme negative scores test: ");
+        Map<String, String> edge = extremeNegative_scores.curveLetterGrades();
+        System.out.println("John's Points: " + extremeNegative_scores.getStudent_Points("John"));
+        System.out.println("Sara's Points: " + extremeNegative_scores.getStudent_Points("Sara"));
+        System.out.println("Tammie's Points: " + extremeNegative_scores.getStudent_Points("Tammie"));
+        for(Map.Entry<String, String> e : edge.entrySet())
+            System.out.println(e.getKey() + " " + e.getValue());
+
+        assertTrue(edge.equals(extremeNegative_scoresExpected));
+    }
 
 
     /* Set up Methods */

@@ -207,6 +207,7 @@ public class Course {
                 if ((double) value / maxPoints * 100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
                     //SER316-start
+                    //Lower edge case for "B" grade was incorrect, fixed
                 } else if ((double) value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
                     //SER316-end
@@ -221,6 +222,7 @@ public class Course {
         } else {
             for (String grade : curveLetterGrades().values())
                 //SER316-start
+                //occur.get(occur) gets a string for Integer input, fixed
                 occur.put(grade, occur.get(grade) + 1);
                 //SER316-end
         }
