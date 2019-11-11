@@ -206,8 +206,10 @@ public class Course {
             for (double value : collection) {
                 if ((double) value / maxPoints * 100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
-                } else if ((double) value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
+                    //SER316-start
+                } else if ((double) value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
+                    //SER316-end
                 } else if ((double) value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
                     occur.put("C", occur.get("C") + 1);
                 } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
