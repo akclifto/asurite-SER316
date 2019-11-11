@@ -84,13 +84,14 @@ public class CourseTest {
         assertTrue(!c1.addStudent(s1));
         //drop
         c1.dropStudent("2144");
-        c1.getStudents().size();
         assertTrue(c1.getStudents().size() == 0);
+
+        Student s2 = new Student("Bill", null);
+//       c1.addStudent(s2);
+        c1.set_points("Bill", 10);
+        s2.register_forCourse(c1);
+        assertTrue(c1.dropStudent(s2.getAsurite()));
     }
-
-
-
-
 
 
 }
