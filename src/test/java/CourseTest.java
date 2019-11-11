@@ -76,18 +76,15 @@ public class CourseTest {
     @Test
     public void addDropStudentTest(){
 
-
         //add
         Student s1 = new Student("2144", Major.CS);
         Course c1 = new Course ("CSE101");
         c1.addStudent(s1);
         assertTrue(c1.getStudents().size() == 1);
         assertTrue(!c1.addStudent(s1));
-
-//        drop
+        //drop
         c1.dropStudent("2144");
         c1.getStudents().size();
-        System.out.println(c1.getStudents().size());
         assertTrue(c1.getStudents().size() == 0);
     }
 
