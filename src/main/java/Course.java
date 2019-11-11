@@ -118,8 +118,11 @@ public class Course {
     // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
     public boolean addStudent(Student s) {
         if (students != null && points.putIfAbsent(s.getAsurite(), -1) == null) {
+            //SER316-start
+            //adding the student twice here, fixed
             students.add(s);
-            return students.add(s);
+            return true;
+            //SER316-end
         }
         return false;
     }
