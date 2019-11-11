@@ -220,7 +220,9 @@ public class Course {
             }
         } else {
             for (String grade : curveLetterGrades().values())
-                occur.put(grade, occur.get(occur) + 1);
+                //SER316-start
+                occur.put(grade, occur.get(grade) + 1);
+                //SER316-end
         }
         return occur;
 
