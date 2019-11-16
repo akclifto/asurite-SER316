@@ -1,9 +1,6 @@
 package main.java;
 
-import java.awt.List;
 import java.util.ArrayList;
-
-
 
 public class Student {
     private String asurite;
@@ -21,7 +18,7 @@ public class Student {
     public String getAsurite() {
         return asurite;
     }
-    
+
     public void setAsurite(String asurite) {
         this.asurite = asurite;
     }
@@ -49,8 +46,12 @@ public class Student {
 
     public boolean equals(Object other){
         if(other == null) return false;
-        if(other == this) return true;
-        if(other.getClass() != this.getClass()) return false;
+        if(other == this) {
+            return true;
+        }
+        if(other.getClass() != this.getClass()) {
+            return false;
+        }
         Student s = (Student) other;
         return this.getAsurite().equals(s.getAsurite());
     }
