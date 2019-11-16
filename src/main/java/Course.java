@@ -63,7 +63,8 @@ public class Course {
             int allPoints = 0;
             for (int point: collection) {
                 if (point >= 0) {
-                    counter = counter++;
+                    //SER316TASK2SPOTBUGS FIX
+                    counter++;
                     if (point < min) {
                         min = point;
                     }
@@ -175,10 +176,10 @@ public class Course {
      * @throws NullPointerException if collection is null */
     public int calculateMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
-
-        if (collection == null) {
-            return 0;
-        }
+        //SER316TASK2SPOTBUGS FIX
+//        if (collection == null) {
+//            return 0;
+//        }
 
         if (collection.size() == 1) {
             return -1;
@@ -243,7 +244,7 @@ public class Course {
             }
         } else {
             for (String grade : curveLetterGrades().values()) {
-                occur.put(grade, occur.get(occur) + 1);
+                occur.put(grade, occur.get(grade) + 1);
             }
         }
         return occur;
