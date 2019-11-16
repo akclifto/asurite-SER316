@@ -2,13 +2,18 @@ package main.java;
 
 import java.util.ArrayList;
 
+
+
 public class Student {
     private String asurite;
     private Major major;
-    private double overall_grade;
+    private double overallGrade;
     private ArrayList<Course> courses = new ArrayList<Course>();
-
-    public Student(String asurite, Major major){
+    
+    /**Ctor for Student:  set asurite, major and overall grade.
+     * @param asurite student id
+     * @major student chose major */
+    public Student(String asurite, Major major) {
         this.setAsurite(asurite);
         this.setMajor(major);
         setOverall_grade(0);
@@ -37,19 +42,25 @@ public class Student {
     }
 
     public double getOverall_grade() {
-        return overall_grade;
+        return overallGrade;
     }
 
-    public void setOverall_grade(double overall_grade) {
-        this.overall_grade = overall_grade;
+    public void setOverall_grade(double overallGrade) {
+        this.overallGrade = overallGrade;
     }
 
-    public boolean equals(Object other){
-        if(other == null) return false;
-        if(other == this) {
+    /**equals method to compare attributes.
+     * @param Object other to compare to null, this, class, and student asurite id.
+     * @return false if null, classes are not equal.
+     * @else true if this object matches passed object and matching asurite ids. */
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
             return true;
         }
-        if(other.getClass() != this.getClass()) {
+        if (other.getClass() != this.getClass()) {
             return false;
         }
         Student s = (Student) other;

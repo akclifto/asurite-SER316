@@ -16,7 +16,7 @@ public class Course {
 
     // maps student names (asurite) to their points
     public HashMap<String, Integer> points = new HashMap<>(); 
-    private String Name; // course name
+    private String name; // course name
     private int maxPoints;
 
 
@@ -31,11 +31,11 @@ public class Course {
     }
 
     public String GetName() {
-        return Name;
+        return name;
     }
 
     public void SetName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
 
@@ -53,22 +53,20 @@ public class Course {
         int counter = 0;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        if(collection.size() == 1)
+        if(collection.size() == 1) {
             return collection.get(0);
-
-        else if(collection.size() == 2 ){
+        } else if(collection.size() == 2 ) {
             return (double)(collection.get(0) + collection.get(1))/2;
         }
         else {
             int allPoints = 0;
             for(int point: collection){
                 if (point >= 0) {
-
                     counter = counter++;
-                    if (point < min){
+                    if(point < min) {
                         min = point;
                     }
-                    if (point > max){
+                    if(point > max) {
                         max = point;
                     }
                     allPoints = allPoints + point;
@@ -101,8 +99,9 @@ public class Course {
     }
 
     public void set_points(String name, int points) {
-        if(!this.points.containsKey(name))
+        if(!this.points.containsKey(name)) {
             addStudent(new Student(name, null));
+        }
         this.points.put(name, points);
     }
 
@@ -164,17 +163,15 @@ public class Course {
         if(collection.size() == 1) {
             return -1;
         }
-
         int max = Integer.MIN_VALUE;
 
         for(int point: collection) {
-            if (point >= 0) {
-                if (point > max) {
+            if(point >= 0) {
+                if(point > max) {
                     max = point;
                 }
             }
         }
-
         return max;
     }
 
@@ -182,8 +179,8 @@ public class Course {
     /**
      * This is where you create your node flow graph and write your White Box test. 
      * Calculates final grades either with curve or without  (assign 3)
-     * <p>
-     * Calculation is based on points member and maxPoints from Course.
+
+     * <p>Calculation is based on points member and maxPoints from Course.
      * Will call curve if input is true. 
      *  * Grading Scale:
      * >  89% -> A
@@ -192,7 +189,7 @@ public class Course {
      * >  35% -> D
      * <= 35% -> F
      * 
-     * @input curved if true curving is done if not curving is ommitted
+     * @input curved if true curving is done if not curving is ommitted.
      * 
      * @return hashmap with final letter grades for students based on curving `points`.
      * @throws NullPointerException
@@ -214,11 +211,11 @@ public class Course {
             for (double value : collection) {
                 if ((double)value/maxPoints*100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
-                } else if ((double)value/maxPoints * 100 > 80.0 && value/maxPoints <= 89.0) {
+                } else if ((double)value / maxPoints*100 > 80.0 && value / maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
                 } else if ((double)value/maxPoints * 100 > 50.0 && value/maxPoints <= 65) {
                     occur.put("C", occur.get("C") + 1);
-                } else if ((double)value/maxPoints*100 > 35.0 && value/maxPoints <= 50.0) {
+                } else if ((double) value/maxPoints*100 > 35.0 && value/maxPoints <= 50.0) {
                     occur.put("D", occur.get("D") + 1);
                 } else {
                     occur.put("F", occur.get("F") + 1);
@@ -253,14 +250,10 @@ public class Course {
      * Returned HashMap points would be = [Alice:F, Bill:D, Cathy:C, Joe:A, Jane:A].
      *
      * @return hashmap with final letter grades for students based on curving `points`.
-     * @throws NullPointerException
+     * @throws NullPointerException if Map is null.
      */
-    public Map<String, String> curveLetterGrades() throws NullPointerException { //TODO verify no side effect with points.
+    //TODO verify no side effect with points.
+    public Map<String, String> curveLetterGrades() throws NullPointerException { 
         return null; //implement me in assign 3 (not in assign 2)
     }
-
-
-
-
-
 }
