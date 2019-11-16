@@ -34,8 +34,6 @@ public class BlackBoxAssign3 {
     HashMap<String, String> curve_75_pointsExpected = new HashMap<String, String>();
     Course curve_15_points_multi;
     HashMap<String, String> curve_15_points_multiExpected = new HashMap<String, String>();
-    Course curve_same_names_scores;
-    HashMap<String, String> curve_same_names_scoresExpected = new HashMap<String, String>();
     Course negative_scores;
     HashMap<String, String> negative_scoresExpected = new HashMap<String, String>();
     Course extremeNegative_scores;

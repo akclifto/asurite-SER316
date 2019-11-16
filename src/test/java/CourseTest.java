@@ -28,7 +28,7 @@ public class CourseTest {
      * Testing Node and Edge Coverage based on line colors in document.
      *  */
     @Test
-    public void TestRed() throws IOException {
+    public void testRed() throws IOException {
 
         oneStudent = new Course ("SER316");
         oneStudent.set_points("Sally", 34);
@@ -45,15 +45,15 @@ public class CourseTest {
     }
 
     @Test
-    public void TestYellow() throws NullPointerException, IOException {
+    public void testYellow() throws NullPointerException, IOException {
 
         oneStudent = new Course ("CSE101");
         exception.expect(NullPointerException.class);
-        HashMap<String, Integer> ans = oneStudent.countOccurencesLetterGrades(false);
+        oneStudent.countOccurencesLetterGrades(false);
     }
 
     @Test
-    public void TestOrange() throws IOException {
+    public void testOrange() throws IOException {
         oneStudent = new Course ("CSE102");
         oneStudent.set_points("Sally", 34);
         oneStudent.set_points("Sara", 36);
@@ -80,6 +80,7 @@ public class CourseTest {
         Student s1 = new Student("2144", Major.CS);
         Course c1 = new Course ("CSE101");
         c1.addStudent(s1);
+        exception.expectMessage("hashCode not designed");
         assertTrue(c1.getStudents().size() == 1);
         assertTrue(!c1.addStudent(s1));
         //drop
