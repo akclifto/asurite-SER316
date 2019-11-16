@@ -12,10 +12,11 @@ import java.util.Map;
 
 public class Course {
 
-    private String Name; // course name
+    // maps student names (asurite) to their points
+    public HashMap<String, Integer> points = new HashMap<>(); 
+    private String name; // course name
     private int maxPoints;
     private ArrayList<Student> students = new ArrayList<Student>();
-    private HashMap<String, Integer> points = new HashMap<>(); // maps student names (asurite) to their points
 
     public Course(String name) {
         this(name, 100);
@@ -23,16 +24,16 @@ public class Course {
     }
 
     public Course(String name, int maxPoints) {
-        this.SetName(name);
+        this.setName(name);
         this.maxPoints = maxPoints;
     }
 
-    public String GetName() {
-        return Name;
+    public String getName() {
+        return name;
     }
 
-    public void SetName(String name) {
-        this.Name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getMaxPoints() {
@@ -47,13 +48,16 @@ public class Course {
         return students;
     }
 
+    /**set_points sets an amount of points to a student.
+     * @param name String is the students name or asurite id in a string.
+     * @param points is the amount of points to add to the student. */
     public void set_points(String name, int points) {
         if (!this.points.containsKey(name)) {
             addStudent(new Student(name, null));
         }
         this.points.put(name, points);
     }
-
+    
     public HashMap<String, Integer> getPoints() {
         return points;
     }
@@ -66,13 +70,19 @@ public class Course {
         return points.get(student.getAsurite());
     }
 
-    public void printCourseStats() {
-        ArrayList<Integer> values = new ArrayList<Integer>(points.values());
 
+    /**printeCourseStats prints out the average grade without max and min values. */
+    public void printCourseStats() {
+        //SER316TASK2SPOTBUGS FIX: values ArrayList not used
+//        ArrayList<Integer> values = new ArrayList<Integer>(points.values());
         System.out.print("Average Grades without max and without min: ");
         System.out.println(this.calculateAverageWithoutMinWithoutMax());
     }
 
+
+    /**Method calculates the average without min and max values.
+     * @return the average without max and min.
+     * @throws NullPointerException if collection is null. */
     public double calculateAverageWithoutMinWithoutMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
 
@@ -83,13 +93,14 @@ public class Course {
         if (collection.size() == 1) {
             return collection.get(0);
         } else if (collection.size() == 2) {
-            return (double) (collection.get(0) + collection.get(1)) / 2;
+            return (double)(collection.get(0) + collection.get(1)) / 2;
         } else {
             int allPoints = 0;
-            for (int point : collection) {
+            for (int point: collection) {
                 if (point >= 0) {
+                    //SER316TASK2SPOTBUGS FIX
+                    counter++;
 
-                    counter = counter++;
                     if (point < min) {
                         min = point;
                     }
@@ -99,15 +110,16 @@ public class Course {
                     allPoints = allPoints + point;
                 }
             }
-
             int totalPoints = allPoints - max - min;
-            return totalPoints / (double) (counter - 1);
-
+            return totalPoints / (double)(counter - 1);
         }
     }
 
     // REACH at least 95% Code Coverage (assign 3)
     // drop a student from course.
+    /**dropsStudent removes a student from a course.
+     * @param asurite String takes the students asurite id.
+     * @return true if student is successfully removed, false otherwise. */
     public boolean dropStudent(String asurite) {
         boolean removeFromPoints = points.remove(asurite) != null;
         boolean removeFromStudents = students.remove(new Student(asurite, null));
@@ -115,7 +127,12 @@ public class Course {
     }
 
     // REACH at least 95% Code coverage  (assign 3)
-    // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
+    // Students should only be added when they are not yet in the course
+    // (names (asurite member) needs to be unique)
+   
+    /**addStudent methods adds a student to the course.  
+     * @param s Student to add to a course.
+     * @return true is student is added, false otherwise. */
     public boolean addStudent(Student s) {
         if (students != null && points.putIfAbsent(s.getAsurite(), -1) == null) {
             //SER316-start
@@ -127,11 +144,16 @@ public class Course {
         return false;
     }
 
-    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) throws NullPointerException {
+    /**calculatePercentiles of a course collection. 
+     * @param collection of students and points for a course.
+     * @return list of percentiles for a course.
+     * @throws NullPointerException if collection is null. */
+    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) 
+            throws NullPointerException {
+
         if (collection == null) {
             throw new NullPointerException();
         }
-
 
         int maxMarks = calculateMax();
         System.out.println("Test: " + maxMarks);
@@ -150,8 +172,15 @@ public class Course {
         return percentileList;
     }
 
+    /**calculate Max value in a collection. 
+     * @return max point value in collection.
+     * @throws NullPointerException if collection is null */
     public int calculateMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
+        //SER316TASK2SPOTBUGS FIX:  if statement dead code, removing
+//        if (collection == null) {
+//            return 0;
+//        }
 
         if (collection == null) {
             return 0;
@@ -160,17 +189,14 @@ public class Course {
         if (collection.size() == 1) {
             return -1;
         }
-
         int max = Integer.MIN_VALUE;
-
-        for (int point : collection) {
+        for (int point: collection) {
             if (point >= 0) {
                 if (point > max) {
                     max = point;
                 }
             }
         }
-
         return max;
     }
 
@@ -178,21 +204,24 @@ public class Course {
     /**
      * This is where you create your node flow graph and write your White Box test.
      * Calculates final grades either with curve or without  (assign 3)
-     * <p>
-     * Calculation is based on points member and maxPoints from Course.
-     * Will call curve if input is true.
-     * * Grading Scale:
+     *
+     * <p>Calculation is based on points member and maxPoints from Course.
+     * Will call curve if input is true. 
+     *  * Grading Scale:
      * >  89% -> A
      * >  79% -> B
      * >  59% -> C
      * >  35% -> D
      * <= 35% -> F
-     *
+     * 
+     * @input curved if true curving is done if not curving is ommitted.
      * @return hashmap with final letter grades for students based on curving `points`.
-     * @throws NullPointerException
-     * @input curved if true curving is done if not curving is ommitted
+     * @throws NullPointerException if HashMap occur is null.
+     * @throws IOException if negative grades detected in curveLetterGrades().
      */
-    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved) throws NullPointerException, IOException {
+    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved)
+            throws NullPointerException, IOException {
+
         HashMap<String, Integer> occur = new HashMap<String, Integer>();
         occur.put("A", 0);
         occur.put("B", 0);
@@ -207,14 +236,11 @@ public class Course {
             }
 
             for (double value : collection) {
-                if ((double) value / maxPoints * 100 > 89.0) {
+                if ((double)value / maxPoints * 100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
-                    //SER316-start
-                    //Lower edge case for "B" grade was incorrect, fixed
-                } else if ((double) value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
+                } else if ((double)value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
-                    //SER316-end
-                } else if ((double) value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
+                } else if ((double)value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
                     occur.put("C", occur.get("C") + 1);
                 } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
                     occur.put("D", occur.get("D") + 1);
@@ -237,8 +263,8 @@ public class Course {
      * This will be needed for assignment 3 (do not change in assignment 2)
      * Calculates final grades including a curve and returns final letter grade
      * of each student.
-     * <p>
-     * Calculation is based on points member inherited from Course.
+     * 
+     * <p>Calculation is based on points member inherited from Course.
      * Curve is calculated by adding the positive difference between the student
      * with the highest non-negative points and maxPoints to all scores.
      * Grading Scale:
@@ -247,15 +273,15 @@ public class Course {
      * >  59% -> C
      * >  35% -> D
      * <= 35% -> F
-     * <p>
-     * eg.let points = [Alice:15, Bill:30, Cathy:45, Joe:70, Jane:80] and maxPoints = 100,
+     * 
+     * <p>eg.let points = [Alice:15, Bill:30, Cathy:45, Joe:70, Jane:80] and maxPoints = 100,
      * curve would be 100 - 80 = 20.
      * Adjusted points would be = [Alice:35, Bill:50, Cathy:65, Joe:90, Jane:100].
      * Adjusted percentages would be = [35%, 50%, 65%, 90%, 100%].
      * Returned HashMap points would be = [Alice:F, Bill:D, Cathy:C, Joe:A, Jane:A].
      *
      * @return hashmap with final letter grades for students based on curving `points`.
-     * @throws NullPointerException
+     * @throws NullPointerException if Map is null.
      */
     public Map<String, String> curveLetterGrades() throws NullPointerException, IOException { //TODO verify no side effect with points.
 
