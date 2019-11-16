@@ -34,7 +34,6 @@ public class GivenBlackBox {
                 {CourseGrades3.class},
                 {CourseGrades4.class},
                 {CourseGrades5.class}
-
         };
         return Arrays.asList(classes);
     }
