@@ -232,7 +232,7 @@ public class GivenBlackBox {
 
 
 
-        // sample test
+    // sample test
     @Test
     public void oneStudent() {
         Map<String, String> ans = oneStudent.curveLetterGrades();
@@ -387,80 +387,80 @@ public class GivenBlackBox {
     }
 
     /**Testing 15 point curve duplicate scores high and low*/
-        public void set_curve_15_points_multi() throws Exception {
-            curve_15_points_multi = createCourse("CS201");
-            curve_15_points_multi.set_points("Adam", 90); //A
-            curve_15_points_multi.set_points("Sara", 90); //A
-            curve_15_points_multi.set_points("John", 90); //A
-            curve_15_points_multi.set_points("Jim", 26); //D
-            curve_15_points_multi.set_points("Angela", 26); //D
-            curve_15_points_multi.set_points("James", 25); //F
-            curve_15_points_multi.set_points("Devin", 25); //F
-            curve_15_points_multi.set_points("Matt", 15); //F
-            curve_15_points_multi.set_points("Marissa", 15); //F
-            curve_15_points_multi.set_points("Sally" , 0);  //F
-            curve_15_points_multi.set_points("Sam" , 0);  //F
-            //expectations
-            curve_15_points_multiExpected.put("Adam", "A");
-            curve_15_points_multiExpected.put("Sara", "A");
-            curve_15_points_multiExpected.put("John", "A");
-            curve_15_points_multiExpected.put("Jim", "D");
-            curve_15_points_multiExpected.put("Angela", "D");
-            curve_15_points_multiExpected.put("James", "F");
-            curve_15_points_multiExpected.put("Devin", "F");
-            curve_15_points_multiExpected.put("Matt", "F");
-            curve_15_points_multiExpected.put("Marissa", "F");
-            curve_15_points_multiExpected.put("Sally" , "F");
-            curve_15_points_multiExpected.put("Sam" , "F");
-        }
+    public void set_curve_15_points_multi() throws Exception {
+        curve_15_points_multi = createCourse("CS201");
+        curve_15_points_multi.set_points("Adam", 90); //A
+        curve_15_points_multi.set_points("Sara", 90); //A
+        curve_15_points_multi.set_points("John", 90); //A
+        curve_15_points_multi.set_points("Jim", 26); //D
+        curve_15_points_multi.set_points("Angela", 26); //D
+        curve_15_points_multi.set_points("James", 25); //F
+        curve_15_points_multi.set_points("Devin", 25); //F
+        curve_15_points_multi.set_points("Matt", 15); //F
+        curve_15_points_multi.set_points("Marissa", 15); //F
+        curve_15_points_multi.set_points("Sally" , 0);  //F
+        curve_15_points_multi.set_points("Sam" , 0);  //F
+        //expectations
+        curve_15_points_multiExpected.put("Adam", "A");
+        curve_15_points_multiExpected.put("Sara", "A");
+        curve_15_points_multiExpected.put("John", "A");
+        curve_15_points_multiExpected.put("Jim", "D");
+        curve_15_points_multiExpected.put("Angela", "D");
+        curve_15_points_multiExpected.put("James", "F");
+        curve_15_points_multiExpected.put("Devin", "F");
+        curve_15_points_multiExpected.put("Matt", "F");
+        curve_15_points_multiExpected.put("Marissa", "F");
+        curve_15_points_multiExpected.put("Sally" , "F");
+        curve_15_points_multiExpected.put("Sam" , "F");
+    }
 
-        /**Test everyone with the same name, two difference scores */
-        public void set_curve_same_names_scores() throws Exception {
-            curve_same_names_scores = createCourse("CS202");
-            curve_same_names_scores.set_points("Adam", 85);
-            curve_same_names_scores.set_points("Adam", 85);
-            curve_same_names_scores.set_points("Adam", 85);
-            curve_same_names_scores.set_points("Adam", 85);
-            curve_same_names_scores.set_points("Adam", 44);
-            curve_same_names_scores.set_points("Adam", 44);
-            curve_same_names_scores.set_points("Adam", 44);
-            curve_same_names_scores.set_points("Adam", 44);
-            //Expectations
-            curve_same_names_scoresExpected.put("Adam", "A");
-            curve_same_names_scoresExpected.put("Adam", "A");
-            curve_same_names_scoresExpected.put("Adam", "A");
-            curve_same_names_scoresExpected.put("Adam", "A");
-            curve_same_names_scoresExpected.put("Adam", "D");
-            curve_same_names_scoresExpected.put("Adam", "D");
-            curve_same_names_scoresExpected.put("Adam", "D");
-            curve_same_names_scoresExpected.put("Adam", "D");
-        }
+    /**Test everyone with the same name, two difference scores */
+    public void set_curve_same_names_scores() throws Exception {
+        curve_same_names_scores = createCourse("CS202");
+        curve_same_names_scores.set_points("Adam", 85);
+        curve_same_names_scores.set_points("Adam", 85);
+        curve_same_names_scores.set_points("Adam", 85);
+        curve_same_names_scores.set_points("Adam", 85);
+        curve_same_names_scores.set_points("Adam", 44);
+        curve_same_names_scores.set_points("Adam", 44);
+        curve_same_names_scores.set_points("Adam", 44);
+        curve_same_names_scores.set_points("Adam", 44);
+        //Expectations
+        curve_same_names_scoresExpected.put("Adam", "A");
+        curve_same_names_scoresExpected.put("Adam", "A");
+        curve_same_names_scoresExpected.put("Adam", "A");
+        curve_same_names_scoresExpected.put("Adam", "A");
+        curve_same_names_scoresExpected.put("Adam", "D");
+        curve_same_names_scoresExpected.put("Adam", "D");
+        curve_same_names_scoresExpected.put("Adam", "D");
+        curve_same_names_scoresExpected.put("Adam", "D");
+    }
 
-        /**Test negative score input with curve */
-        public void set_negative_scores() throws Exception {
-            negative_scores = createCourse("CS301");
-            negative_scores.set_points("John", 50);
-            negative_scores.set_points("<0", -1);
-            negative_scores.set_points("<-10", -20);
-            negative_scores.set_points("<-50", -60);
-            //expected
-            negative_scoresExpected.put("John", "A");
-            negative_scoresExpected.put("<0", "F");
-            negative_scoresExpected.put("<-10", "F");
-            negative_scoresExpected.put("<-50", "F");
-        }
+    /**Test negative score input with curve */
+    public void set_negative_scores() throws Exception {
+        negative_scores = createCourse("CS301");
+        negative_scores.set_points("John", 50);
+        negative_scores.set_points("<0", -1);
+        negative_scores.set_points("<-10", -20);
+        negative_scores.set_points("<-50", -60);
+        //expected
+        negative_scoresExpected.put("John", "A");
+        negative_scoresExpected.put("<0", "F");
+        negative_scoresExpected.put("<-10", "F");
+        negative_scoresExpected.put("<-50", "F");
+    }
 
-        /**Tests extreme negative only cases. */
-        public void set_extremeNegative_scores() throws Exception {
-            extremeNegative_scores =  createCourse("CS302");
-            extremeNegative_scores.set_points("John", -180);
-            extremeNegative_scores.set_points("Sara", -95);
-            extremeNegative_scores.set_points("Tammie", -80);
+    /**Tests extreme negative only cases. */
+    public void set_extremeNegative_scores() throws Exception {
+        extremeNegative_scores =  createCourse("CS302");
+        extremeNegative_scores.set_points("John", -180);
+        extremeNegative_scores.set_points("Sara", -95);
+        extremeNegative_scores.set_points("Tammie", -80);
 
-            //expected
-            extremeNegative_scoresExpected.put("John", "F");
-            extremeNegative_scoresExpected.put("Sara", "F");
-            extremeNegative_scoresExpected.put("Tammie", "F");
-        }
+        //expected
+        extremeNegative_scoresExpected.put("John", "F");
+        extremeNegative_scoresExpected.put("Sara", "F");
+        extremeNegative_scoresExpected.put("Tammie", "F");
+    }
 
 }

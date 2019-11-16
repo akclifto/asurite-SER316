@@ -14,7 +14,8 @@ import java.util.Map;
 
 public class Course {
 
-    public HashMap<String, Integer> points = new HashMap<>(); // maps student names (asurite) to their points
+    // maps student names (asurite) to their points
+    public HashMap<String, Integer> points = new HashMap<>(); 
     private String Name; // course name
     private int maxPoints;
 
@@ -177,7 +178,7 @@ public class Course {
         return max;
     }
 
-    
+
     /**
      * This is where you create your node flow graph and write your White Box test. 
      * Calculates final grades either with curve or without  (assign 3)
@@ -234,8 +235,8 @@ public class Course {
     /** This will be needed for assignment 3 (do not change in assignment 2)
      * Calculates final grades including a curve and returns final letter grade
      * of each student.
-     * <p>
-     * Calculation is based on points member inherited from Course.
+     * 
+     * <p>Calculation is based on points member inherited from Course.
      * Curve is calculated by adding the positive difference between the student
      * with the highest non-negative points and maxPoints to all scores.
      * Grading Scale:
@@ -244,8 +245,8 @@ public class Course {
      * >  59% -> C
      * >  35% -> D
      * <= 35% -> F
-     * <p>
-     * eg.let points = [Alice:15, Bill:30, Cathy:45, Joe:70, Jane:80] and maxPoints = 100,
+     * 
+     * <p>eg.let points = [Alice:15, Bill:30, Cathy:45, Joe:70, Jane:80] and maxPoints = 100,
      * curve would be 100 - 80 = 20.
      * Adjusted points would be = [Alice:35, Bill:50, Cathy:65, Joe:90, Jane:100].
      * Adjusted percentages would be = [35%, 50%, 65%, 90%, 100%].
