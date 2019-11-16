@@ -26,19 +26,19 @@ public class Course {
     }
 
     public Course(String name, int maxPoints) {
-        this.SetName(name);
+        this.setName(name);
         this.maxPoints = maxPoints;
     }
 
-    public String GetName() {
+    public String getName() {
         return name;
     }
 
-    public void SetName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-
+    /**printeCourseStats prints out the average grade without max and min values. */
     public void printCourseStats() {
         ArrayList<Integer> values = new ArrayList<Integer>(points.values());
 
@@ -46,41 +46,45 @@ public class Course {
         System.out.println(this.calculateAverageWithoutMinWithoutMax());
     }
 
-
+    /**Method calculates the average without min and max values.
+     * @return the average without max and min.
+     * @throws NullPointerException if collection is null. */
     public double calculateAverageWithoutMinWithoutMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
 
         int counter = 0;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        if(collection.size() == 1) {
+        if (collection.size() == 1) {
             return collection.get(0);
-        } else if(collection.size() == 2 ) {
-            return (double)(collection.get(0) + collection.get(1))/2;
-        }
-        else {
+        } else if (collection.size() == 2) {
+            return (double)(collection.get(0) + collection.get(1)) / 2;
+        } else {
             int allPoints = 0;
-            for(int point: collection){
+            for (int point: collection) {
                 if (point >= 0) {
                     counter = counter++;
-                    if(point < min) {
+                    if (point < min) {
                         min = point;
                     }
-                    if(point > max) {
+                    if (point > max) {
                         max = point;
                     }
                     allPoints = allPoints + point;
                 }
             }
 
-            int totalPoints = allPoints-max-min;
-            return totalPoints/(double)(counter-1);
+            int totalPoints = allPoints - max - min;
+            return totalPoints / (double)(counter - 1);
 
         }
     }
 
     // REACH at least 95% Code Coverage (assign 3)
     // drop a student from course.
+    /**dropsStudent removes a student from a course.
+     * @param asurite String takes the students asurite id.
+     * @return true if student is successfully removed, false otherwise. */
     public boolean dropStudent(String asurite) {
         boolean removeFromPoints = points.remove(asurite) != null;
         boolean removeFromStudents = students.remove(new Student(asurite, null));
@@ -88,24 +92,32 @@ public class Course {
     }
 
     // REACH at least 95% Code coverage  (assign 3)
-    // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
+    // Students should only be added when they are not yet in the course
+    // (names (asurite member) needs to be unique)
     ArrayList<Student> students  = new ArrayList<Student>();
+    
+    /**addStudent methods adds a student to the course.  
+     * @param s Student to add to a course.
+     * @return true is student is added, false otherwise. */
     public boolean addStudent(Student s) {
-        if(students != null && points.putIfAbsent(s.getAsurite(), -1) == null){
+        if (students != null && points.putIfAbsent(s.getAsurite(), -1) == null) {
             students.add(s);
             return students.add(s);
         }
         return false;
     }
 
+    /**set_points sets an amount of points to a student.
+     * @param name String is the students name or asurite id in a string.
+     * @param points is the amount of points to add to the student. */
     public void set_points(String name, int points) {
-        if(!this.points.containsKey(name)) {
+        if (!this.points.containsKey(name)) {
             addStudent(new Student(name, null));
         }
         this.points.put(name, points);
     }
 
-    public HashMap<String, Integer> getPoints(){
+    public HashMap<String, Integer> getPoints() {
         return points;
     }
 
@@ -126,11 +138,16 @@ public class Course {
     }
 
 
-    public ArrayList<Student> getStudents(){
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
-    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) throws NullPointerException{
+    /**calculatePercentiles of a course collection. 
+     * @param collection of students and points for a course.
+     * @return list of percentiles for a course.
+     * @throws NullPointerException if collection is null. */
+    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection)
+            throws NullPointerException {
         if (collection == null) {
             throw new NullPointerException();
         }
@@ -153,21 +170,24 @@ public class Course {
         return percentileList;
     }
 
+    /**calculate Max value in a collection. 
+     * @return max point value in collection.
+     * @throws NullPointerException if collection is null */
     public int calculateMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
 
-        if(collection == null) {
+        if (collection == null) {
             return 0;
         }
 
-        if(collection.size() == 1) {
+        if (collection.size() == 1) {
             return -1;
         }
         int max = Integer.MIN_VALUE;
 
-        for(int point: collection) {
-            if(point >= 0) {
-                if(point > max) {
+        for (int point: collection) {
+            if (point >= 0) {
+                if (point > max) {
                     max = point;
                 }
             }
@@ -179,7 +199,7 @@ public class Course {
     /**
      * This is where you create your node flow graph and write your White Box test. 
      * Calculates final grades either with curve or without  (assign 3)
-
+     *
      * <p>Calculation is based on points member and maxPoints from Course.
      * Will call curve if input is true. 
      *  * Grading Scale:
@@ -190,11 +210,11 @@ public class Course {
      * <= 35% -> F
      * 
      * @input curved if true curving is done if not curving is ommitted.
-     * 
      * @return hashmap with final letter grades for students based on curving `points`.
-     * @throws NullPointerException
+     * @throws NullPointerException if HashMap occur is null.
      */
-    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved) throws NullPointerException{
+    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved)
+            throws NullPointerException {
         HashMap<String, Integer> occur = new HashMap<String, Integer>();
         occur.put("A", 0);
         occur.put("B", 0);
@@ -202,28 +222,29 @@ public class Course {
         occur.put("D", 0);
         occur.put("F", 0);
 
-        if(!curved) {
+        if (!curved) {
             ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
             if (collection.isEmpty()) {
                 throw new NullPointerException();
             }
 
             for (double value : collection) {
-                if ((double)value/maxPoints*100 > 89.0) {
+                if ((double)value / maxPoints * 100 > 89.0) {
                     occur.put("A", occur.get("A") + 1);
-                } else if ((double)value / maxPoints*100 > 80.0 && value / maxPoints <= 89.0) {
+                } else if ((double)value / maxPoints * 100 > 80.0 && value / maxPoints <= 89.0) {
                     occur.put("B", occur.get("B") + 1);
-                } else if ((double)value/maxPoints * 100 > 50.0 && value/maxPoints <= 65) {
+                } else if ((double)value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
                     occur.put("C", occur.get("C") + 1);
-                } else if ((double) value/maxPoints*100 > 35.0 && value/maxPoints <= 50.0) {
+                } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
                     occur.put("D", occur.get("D") + 1);
                 } else {
                     occur.put("F", occur.get("F") + 1);
                 }
             }
         } else {
-            for(String grade : curveLetterGrades().values())
+            for (String grade : curveLetterGrades().values()) {
                 occur.put(grade, occur.get(occur) + 1);
+            }
         }
         return occur;
 

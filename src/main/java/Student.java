@@ -50,7 +50,7 @@ public class Student {
     }
 
     /**equals method to compare attributes.
-     * @param Object other to compare to null, this, class, and student asurite id.
+     * @param other Object to compare to null, this, class, and student asurite id.
      * @return false if null, classes are not equal.
      * @else true if this object matches passed object and matching asurite ids. */
     public boolean equals(Object other) {
