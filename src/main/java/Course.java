@@ -40,7 +40,8 @@ public class Course {
 
     /**printeCourseStats prints out the average grade without max and min values. */
     public void printCourseStats() {
-        ArrayList<Integer> values = new ArrayList<Integer>(points.values());
+        //SER316TASK2SPOTBUGS FIX: values ArrayList not used
+//        ArrayList<Integer> values = new ArrayList<Integer>(points.values());
 
         System.out.print("Average Grades without max and without min: ");
         System.out.println(this.calculateAverageWithoutMinWithoutMax());
@@ -176,7 +177,7 @@ public class Course {
      * @throws NullPointerException if collection is null */
     public int calculateMax() throws NullPointerException {
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
-        //SER316TASK2SPOTBUGS FIX
+        //SER316TASK2SPOTBUGS FIX:  if statement dead code, removing
 //        if (collection == null) {
 //            return 0;
 //        }
