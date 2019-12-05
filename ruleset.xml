@@ -31,15 +31,12 @@
 		<properties>
         <property name="reportLevel" value="10"/>
     </properties>
+</rule>
     <rule ref="category/java/bestpractices.xml/MissingOverride" />
     <rule ref="category/java/design.xml/SimplifyConditional" />
     <rule ref="category/java/bestpractices.xml/LooseCoupling" />
     <rule ref="category/java/design.xml/SimplifyBooleanAssertion" />
     <rule ref="category/java/design.xml/SimplifyBooleanExpressions" />
     <rule ref="category/java/design.xml/SimplifyBooleanReturns" />
-    <rule ref="category/java/design.xml/SimplifyConditional" />
-</rule>
-
-
 
 </ruleset>
