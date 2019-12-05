@@ -3,6 +3,7 @@
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+.project
 
 # Log file
 *.log
