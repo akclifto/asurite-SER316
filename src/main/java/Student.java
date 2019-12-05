@@ -1,6 +1,5 @@
 package main.java;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 
@@ -8,10 +7,13 @@ import java.util.ArrayList;
 public class Student {
     private String asurite;
     private Major major;
-    private double overall_grade;
+    private double overallGrade;
     private ArrayList<Course> courses = new ArrayList<Course>();
     
-    public Student(String asurite, Major major){
+    /**Ctor for Student:  set asurite, major and overall grade.
+     * @param asurite student id
+     * @major student chose major */
+    public Student(String asurite, Major major) {
         this.setAsurite(asurite);
         this.setMajor(major);
         setOverall_grade(0);
@@ -29,28 +31,50 @@ public class Student {
     public Major getMajor() {
         return major;
     }
-    
+
     public boolean register_forCourse(Course course) {
-      course.addStudent(this);
-      return courses.add(course);
-  }
+        course.addStudent(this);
+        return courses.add(course);
+    }
 
     public void setMajor(Major major) {
         this.major = major;
     }
 
     public double getOverall_grade() {
-        return overall_grade;
+        return overallGrade;
     }
 
-    public void setOverall_grade(double overall_grade) {
-        this.overall_grade = overall_grade;
+    public void setOverall_grade(double overallGrade) {
+        this.overallGrade = overallGrade;
+    }
+    
+    //SER316TASK2SPOTBUGS FIX
+    @Override
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42;
     }
 
-    public boolean equals(Object other){
-        if(other == null) return false;
-        if(other == this) return true;
-        if(other.getClass() != this.getClass()) return false;
+    /**equals method to compare attributes.
+     * @param other Object to compare to null, this, class, and student asurite id.
+     * @return false if null, classes are not equal.
+     * @else true if this object matches passed object and matching asurite ids. */
+    public boolean equals(Object other) {
+        
+        if (other == null) {
+            return false;
+        }
+        //SER316TASK2SPOTBUGS FIX
+        if (other.hashCode() == 42) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
         Student s = (Student) other;
         return this.getAsurite().equals(s.getAsurite());
     }

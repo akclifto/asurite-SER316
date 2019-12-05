@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,7 +34,6 @@ public class GivenBlackBox {
                 {CourseGrades3.class},
                 {CourseGrades4.class},
                 {CourseGrades5.class}
-
         };
         return Arrays.asList(classes);
     }
@@ -125,7 +125,7 @@ public class GivenBlackBox {
 
     /*Test Methods */
     @Test
-    public void centerBoundaryPartition_noCurve(){
+    public void centerBoundaryPartition_noCurve() throws IOException {
         System.out.println("Starting center boundary partition noCurve test: ");
         Map<String, String> cen = centerBoundaryPartition_noCurve.curveLetterGrades();
         for(Map.Entry<String, String> e : cen.entrySet())
@@ -134,7 +134,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void edgeBoundary_noCurve(){
+    public void edgeBoundary_noCurve() throws IOException {
         System.out.println("Starting edge boundaris noCurve test: ");
         Map<String, String> edge = edgeBoundary_noCurve.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -143,7 +143,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void extremes_noCurve_01(){
+    public void extremes_noCurve_01() throws IOException {
         System.out.println("Starting extremes noCurve test 1: ");
         Map<String, String> extr = extremes_noCurve_01.curveLetterGrades();
         for(Map.Entry<String, String> e : extr.entrySet())
@@ -152,7 +152,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void extremes_noCurve_02(){
+    public void extremes_noCurve_02() throws IOException {
         System.out.println("Starting extremes noCurve test 2:");
         Map<String, String> extr = extremes_noCurve_02.curveLetterGrades();
         for(Map.Entry<String, String> e : extr.entrySet())
@@ -162,7 +162,7 @@ public class GivenBlackBox {
 
 
     @Test
-    public void curve_5_points_edges(){
+    public void curve_5_points_edges() throws IOException {
         System.out.println("Starting 5 point curve test: ");
         Map<String, String> edge = curve_5_points_edges.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -171,7 +171,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void curve_15_points_multi(){
+    public void curve_15_points_multi() throws IOException {
         System.out.println("Starting 15 point curve muli test: ");
         Map<String, String> edge = curve_15_points_multi.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -181,7 +181,7 @@ public class GivenBlackBox {
 
 
     @Test
-    public void curve_35_points_edges(){
+    public void curve_35_points_edges() throws IOException {
         System.out.println("Starting 35 point curve test: ");
         Map<String, String> edge = curve_35_points.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -190,7 +190,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void curve_75_points_edges(){
+    public void curve_75_points_edges() throws IOException {
         System.out.println("Starting 75 point curve test: ");
         Map<String, String> edge = curve_75_points.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -199,7 +199,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void curve_same_names_scores(){
+    public void curve_same_names_scores() throws IOException {
         System.out.println("Starting same names and scores test: ");
         Map<String, String> edge = curve_same_names_scores.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -208,7 +208,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void negative_scores(){
+    public void negative_scores() throws IOException {
         System.out.println("Starting negative scores test: ");
         Map<String, String> edge = negative_scores.curveLetterGrades();
         for(Map.Entry<String, String> e : edge.entrySet())
@@ -217,7 +217,7 @@ public class GivenBlackBox {
     }
 
     @Test
-    public void extremeNegative_scores(){
+    public void extremeNegative_scores() throws IOException {
         System.out.println("Starting extreme negative scores test: ");
         Map<String, String> edge = extremeNegative_scores.curveLetterGrades();
         System.out.println("John's Points: " + extremeNegative_scores.getStudent_Points("John"));
@@ -234,7 +234,7 @@ public class GivenBlackBox {
 
         // sample test
     @Test
-    public void oneStudent() {
+    public void oneStudent() throws IOException {
         Map<String, String> ans = oneStudent.curveLetterGrades();
         for(Map.Entry<String, String> e : ans.entrySet())
             System.out.println(e.getKey() + " " + e.getValue());
@@ -243,7 +243,7 @@ public class GivenBlackBox {
 
     // sample test2
     @Test
-    public void happyDayGradeBoundaries() {
+    public void happyDayGradeBoundaries() throws IOException {
         Map<String, String> ans = happyDayGradeBoundary.curveLetterGrades();
         for(Map.Entry<String, String> e : ans.entrySet())
             System.out.println(e.getKey() + " " + e.getValue());
