@@ -85,8 +85,8 @@ public class Course {
      * @return the average without max and min.
      * @throws NullPointerException if collection is null. */
     public double calculateAverageWithoutMinWithoutMax() throws NullPointerException {
+        
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
-
         int counter = 0;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
@@ -101,7 +101,6 @@ public class Course {
                 if (point >= 0) {
                     //SER316TASK2SPOTBUGS FIX
                     counter++;
-
                     if (point < min) {
                         min = point;
                     }
@@ -115,6 +114,7 @@ public class Course {
             return totalPoints / (double)(counter - 1);
         }
     }
+    
 
     // REACH at least 95% Code Coverage (assign 3)
     // drop a student from course.
@@ -230,11 +230,7 @@ public class Course {
 
             ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
             
-            if (collection.isEmpty()) {
-                
-                throw new NullPointerException();
-            }
-            
+            checkForNull(collection);            
             setGrades(occur, collection);
             
         } else {
@@ -343,7 +339,7 @@ public class Course {
     }
     
     
-    /**Helper method for curveLetterGrades to get max grade value
+    /**Helper method for curveLetterGrades to get max grade value.
      * @throws IOException */
     private int getMaxGrade(List<Integer> collection) throws IOException {
         
@@ -365,6 +361,8 @@ public class Course {
         return maximum;
     }
     
+    /**Helper method for curveLetterGrades and countOccurencesLetterGrades to check for null.
+     **/
     private void checkForNull(List<Integer> collection) {
         
         if (collection.isEmpty()) {
