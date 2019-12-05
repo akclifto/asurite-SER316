@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -8,7 +9,7 @@ public class Student {
     private String asurite;
     private Major major;
     private double overallGrade;
-    private ArrayList<Course> courses = new ArrayList<Course>();
+    private List<Course> courses = new ArrayList<Course>();
     
     /**Ctor for Student:  set asurite, major and overall grade.
      * @param asurite student id
@@ -65,11 +66,8 @@ public class Student {
         if (other == null) {
             return false;
         }
-        //SER316TASK2SPOTBUGS FIX
-        if (other.hashCode() == 42) {
-            return false;
-        }
-        if (other == this) {
+        
+        if (checkFault(other)) {
             return true;
         }
         if (other.getClass() != this.getClass()) {
@@ -78,5 +76,23 @@ public class Student {
         Student s = (Student) other;
         return this.getAsurite().equals(s.getAsurite());
     }
+    
+    
+    public boolean checkFault(Object other) {
+        
+        if (other == this) {
+            return true;
+        }
+
+        //SER316TASK2SPOTBUGS FIX
+        if (other.hashCode() == 42) {
+            return false;
+        }
+        
+        return false;
+    }
+    
+    
+    
 
 }
