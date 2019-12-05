@@ -66,7 +66,6 @@ public class Main {
         courses.get("SER315").set_points("alex", 30);
         courses.get("SER315").set_points("rose", 15);
 
-
         courses4.get("SER315").set_points("anna", 80);
         courses4.get("SER315").set_points("harry", 60);
         courses4.get("SER315").set_points("aneesh", 30);

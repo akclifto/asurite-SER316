@@ -33,6 +33,7 @@
     </properties>
 </rule>
     <rule ref="category/java/bestpractices.xml/MissingOverride" />
+    <rule ref="category/java/design.xml/UselessOverridingMethod" />
     <rule ref="category/java/design.xml/SimplifyConditional" />
     <rule ref="category/java/bestpractices.xml/LooseCoupling" />
     <rule ref="category/java/design.xml/SimplifyBooleanAssertion" />

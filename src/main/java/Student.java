@@ -61,6 +61,7 @@ public class Student {
      * @param other Object to compare to null, this, class, and student asurite id.
      * @return false if null, classes are not equal.
      * @else true if this object matches passed object and matching asurite ids. */
+    @Override
     public boolean equals(Object other) {
         
         if (other == null) {
@@ -83,10 +84,7 @@ public class Student {
         
         if (other == this) {
             return true;
-        }
-
-        //SER316TASK2SPOTBUGS FIX
-        if (other.hashCode() == 42) {
+        } else if (other.hashCode() == 42) {  //SER316TASK2SPOTBUGS FIX
             return false;
         }
         
