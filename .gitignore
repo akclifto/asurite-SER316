@@ -36,7 +36,7 @@ modules.xml
 
 /build/
 /bin/
-/class/
+
 
 # Mac DS file
 .DS_Store
