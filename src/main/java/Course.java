@@ -14,7 +14,8 @@ import java.util.Map;
 public class Course {
 
     // maps student names (asurite) to their points
-    public HashMap<String, Integer> points = new HashMap<>(); 
+//    public HashMap<String, Integer> points = new HashMap<>(); 
+    private Registration reg;
     private String name; // course name
     private int maxPoints;
     private ArrayList<Student> students = new ArrayList<Student>();
@@ -27,6 +28,7 @@ public class Course {
     public Course(String name, int maxPoints) {
         this.setName(name);
         this.maxPoints = maxPoints;
+        reg = new Registration();
     }
 
     public String getName() {
@@ -48,11 +50,17 @@ public class Course {
    public List<Student> getStudents() {
         return students;
     }
+   
+   public void regStudent(String name, Course course) {
+       reg.newRegister(name, course);
+   }
 
     /**set_points sets an amount of points to a student.
      * @param name String is the students name or asurite id in a string.
      * @param points is the amount of points to add to the student. */
     public void set_points(String name, int points) {
+        
+       
        if (!this.points.containsKey(name)) {
             addStudent(new Student(name, null));
         }
@@ -182,7 +190,6 @@ public class Course {
         //        if (collection == null) {
         //            return 0;
         //        }
-
         if (collection.size() == 1) {
             return -1;
         }

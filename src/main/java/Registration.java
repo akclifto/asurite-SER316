@@ -44,7 +44,7 @@ public class Registration {
         }
         
         for (int i = 0; i < regList.size(); i++) {
-            if(regList.get(i).getStudent().getAsurite().equals(name)) {
+            if (regList.get(i).getStudent().getAsurite().equals(name)) {
                 System.out.println("Student already registered for course.");
             } else {
                 Student student = new Student(name, null);
