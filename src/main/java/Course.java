@@ -45,7 +45,7 @@ public class Course {
         this.maxPoints = maxPoints;
     }
 
-   public ArrayList<Student> getStudents() {
+   public List<Student> getStudents() {
         return students;
     }
 
@@ -59,7 +59,7 @@ public class Course {
         this.points.put(name, points);
     }
     
-    public HashMap<String, Integer> getPoints() {
+    public Map<String, Integer> getPoints() {
         return points;
     }
 
@@ -149,7 +149,7 @@ public class Course {
      * @param collection of students and points for a course.
      * @return list of percentiles for a course.
      * @throws NullPointerException if collection is null. */
-    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) 
+    public List<Double> calculatePercentiles(List<Integer> collection) 
             throws NullPointerException {
 
         if (collection == null) {
@@ -216,7 +216,7 @@ public class Course {
      * @throws NullPointerException if HashMap occur is null.
      * @throws IOException if negative grades detected in curveLetterGrades().
      */
-    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved)
+    public Map<String, Integer> countOccurencesLetterGrades(boolean curved)
             throws NullPointerException, IOException {
 
         HashMap<String, Integer> occur = new HashMap<String, Integer>();
