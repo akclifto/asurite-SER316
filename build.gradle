@@ -30,6 +30,8 @@ dependencies {
          //specific test class
          includeTestsMatching "GivenWhiteBox"
          includeTestsMatching "CourseTest"
+         includeTestsMatching "BlackBoxAssign3"
+         
      }
  }
 
