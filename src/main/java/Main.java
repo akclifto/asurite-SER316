@@ -31,7 +31,7 @@ public class Main {
 
     }
     
-    
+    /**Helper method to set set students for main. */
     public static void setStudents() {
         
         students.put("anna", new Student("anna", Major.valueOf("SER")));
@@ -44,6 +44,7 @@ public class Main {
         students.put("rose", new Student("rose", Major.valueOf("SER")));
     }
     
+    /**Helper method to set courses for main. */
     public static void setCourses() {
         
         courses.put("SER316", new CourseGrades0("SER316"));
@@ -55,6 +56,7 @@ public class Main {
         courses4.put("SC232", new CourseGrades4("CS232"));
     }
     
+    /**Helper method to get courses for main. */
     public static void getCourses() {
         
         courses.get("SER315").set_points("anna", 40);

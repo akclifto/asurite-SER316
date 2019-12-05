@@ -340,7 +340,7 @@ public class Course {
     
     
     /**Helper method for curveLetterGrades to get max grade value.
-     * @throws IOException */
+     * @throws IOException if negative grades are detected. */
     private int getMaxGrade(List<Integer> collection) throws IOException {
         
         int maximum = collection.get(0);
