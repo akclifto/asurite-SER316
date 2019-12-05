@@ -295,27 +295,11 @@ public class Course {
     public Map<String, String> curveLetterGrades() throws NullPointerException, IOException { 
 
         HashMap<String, String> curve = new HashMap<>();
-
-
         ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
-        int max = collection.get(0);
-
-        if (collection.isEmpty()) {
-            throw new NullPointerException();
-        }
-
-        for (int i = 0; i < collection.size(); i++) {
-            if (collection.get(i) < 0) {
-                throw new IOException("Negative grades were detected. Fix inputs and retry.");
-            }
-
-            if (collection.get(i) > max) {
-                max = collection.get(i);
-            }
-        }
-        if (max > 100) {
-            max = 100;
-        }
+        
+        checkForNull(collection);
+        
+        int max = getMaxGrade(collection);
         int curveAdded = maxPoints - max;
         System.out.println("The curve will be: " + curveAdded + "pts.");
 
@@ -356,5 +340,35 @@ public class Course {
             }
         }
         return curve;
+    }
+    
+    
+    /**Helper method for curveLetterGrades to get max grade value
+     * @throws IOException */
+    private int getMaxGrade(List<Integer> collection) throws IOException {
+        
+        int maximum = collection.get(0);
+
+        for (int i = 0; i < collection.size(); i++) {
+            if (collection.get(i) < 0) {
+                throw new IOException("Negative grades were detected. Fix inputs and retry.");
+            }
+
+            if (collection.get(i) > maximum) {
+                maximum = collection.get(i);
+            }
+        }
+        if (maximum > 100) {
+            maximum = 100;
+        }
+        
+        return maximum;
+    }
+    
+    private void checkForNull(List<Integer> collection) {
+        
+        if (collection.isEmpty()) {
+            throw new NullPointerException();
+        }
     }
 }
