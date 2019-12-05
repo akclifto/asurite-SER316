@@ -7,16 +7,17 @@ package main.java;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class Course {
 
     // maps student names (asurite) to their points
-    public HashMap<String, Integer> points = new HashMap<>(); 
+    public Map<String, Integer> points = new HashMap<>(); 
     private String name; // course name
     private int maxPoints;
-    private ArrayList<Student> students = new ArrayList<Student>();
+    private List<Student> students = new ArrayList<Student>();
 
     public Course(String name) {
         this(name, 100);
@@ -44,7 +45,7 @@ public class Course {
         this.maxPoints = maxPoints;
     }
 
-    public ArrayList<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
@@ -58,7 +59,7 @@ public class Course {
         this.points.put(name, points);
     }
     
-    public HashMap<String, Integer> getPoints() {
+    public Map<String, Integer> getPoints() {
         return points;
     }
 
@@ -280,7 +281,7 @@ public class Course {
      * @return hashmap with final letter grades for students based on curving `points`.
      * @throws NullPointerException if Map is null.
      */
-    public Map<String, String> curveLetterGrades() throws IOException { 
+    public Map<String, String> curveLetterGrades() throws NullPointerException, IOException { 
 
         HashMap<String, String> curve = new HashMap<>();
 

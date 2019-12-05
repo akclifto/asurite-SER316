@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,7 +29,7 @@ public class CourseTest {
      * Testing Node and Edge Coverage based on line colors in document.
      *  */
     @Test
-    public void testRed() throws IOException {
+    public void testRed() throws NullPointerException, IOException {
 
         oneStudent = new Course ("SER316");
         oneStudent.set_points("Sally", 34);
@@ -36,7 +37,7 @@ public class CourseTest {
         oneStudent.set_points("Arthur", 60);
         oneStudent.set_points("John", 80);
         oneStudent.set_points("Dutch", 90);
-        HashMap<String, Integer> ans = oneStudent.countOccurencesLetterGrades(false);
+        Map<String, Integer> ans = oneStudent.countOccurencesLetterGrades(false);
         assertTrue(ans.get("A") == 1);
         assertTrue(ans.get("B") == 1);
         assertTrue(ans.get("C") == 1);
@@ -53,14 +54,14 @@ public class CourseTest {
     }
 
     @Test
-    public void testOrange() throws IOException {
+    public void testOrange() throws NullPointerException, IOException {
         oneStudent = new Course ("CSE102");
         oneStudent.set_points("Sally", 34);
         oneStudent.set_points("Sara", 36);
         oneStudent.set_points("Arthur", 60);
         oneStudent.set_points("John", 80);
         oneStudent.set_points("Dutch", 100);
-        HashMap<String, Integer> ans = oneStudent.countOccurencesLetterGrades(true);
+        Map<String, Integer> ans = oneStudent.countOccurencesLetterGrades(true);
         assertTrue(ans.get("A") == 1);
         assertTrue(ans.get("B") == 1);
         assertTrue(ans.get("C") == 1);
