@@ -14,14 +14,14 @@ import java.util.Map;
 public class Course {
 
     // maps student names (asurite) to their points
-    public Map<String, Integer> points = new HashMap<>(); 
+    public HashMap<String, Integer> points = new HashMap<>(); 
     private String name; // course name
     private int maxPoints;
-    private List<Student> students = new ArrayList<Student>();
+    private ArrayList<Student> students = new ArrayList<Student>();
+
 
     public Course(String name) {
         this(name, 100);
-
     }
 
     public Course(String name, int maxPoints) {
@@ -45,7 +45,7 @@ public class Course {
         this.maxPoints = maxPoints;
     }
 
-    public List<Student> getStudents() {
+   public ArrayList<Student> getStudents() {
         return students;
     }
 
@@ -53,13 +53,13 @@ public class Course {
      * @param name String is the students name or asurite id in a string.
      * @param points is the amount of points to add to the student. */
     public void set_points(String name, int points) {
-        if (!this.points.containsKey(name)) {
+       if (!this.points.containsKey(name)) {
             addStudent(new Student(name, null));
         }
         this.points.put(name, points);
     }
     
-    public Map<String, Integer> getPoints() {
+    public HashMap<String, Integer> getPoints() {
         return points;
     }
 
@@ -149,7 +149,7 @@ public class Course {
      * @param collection of students and points for a course.
      * @return list of percentiles for a course.
      * @throws NullPointerException if collection is null. */
-    public List<Double> calculatePercentiles(List<Integer> collection) 
+    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) 
             throws NullPointerException {
 
         if (collection == null) {
@@ -165,7 +165,7 @@ public class Course {
 
             if (element > 0) {
 
-                eachPercentile = (double) (element / maxMarks * 100);
+                eachPercentile = element / maxMarks * 100;
                 percentileList.add(eachPercentile);
             }
         }
@@ -216,10 +216,10 @@ public class Course {
      * @throws NullPointerException if HashMap occur is null.
      * @throws IOException if negative grades detected in curveLetterGrades().
      */
-    public Map<String, Integer> countOccurencesLetterGrades(boolean curved)
+    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved)
             throws NullPointerException, IOException {
 
-        Map<String, Integer> occur = new HashMap<String, Integer>();
+        HashMap<String, Integer> occur = new HashMap<String, Integer>();
         occur.put("A", 0);
         occur.put("B", 0);
         occur.put("C", 0);
@@ -227,12 +227,15 @@ public class Course {
         occur.put("F", 0);
 
         if (!curved) {
+
             ArrayList<Integer> collection = new ArrayList<Integer>(points.values());
+            
             if (collection.isEmpty()) {
+                
                 throw new NullPointerException();
             }
-
-            setGrade(occur, collection);
+            
+            setGrades(occur, collection);
             
         } else {
             for (String grade : curveLetterGrades().values()) {
@@ -243,31 +246,27 @@ public class Course {
             }       
         }
         return occur;
-
     }
     
-    /**Method:  Sets grades for countOccurencesLetterGrades.
-     * Inputs: occur : Map, collection : ArrayList
-     * 
-     * <p>Description: helper method to set grades for countOccurencesLetterGrades.
-     *  */
-    private void setGrade(Map<String, Integer> occur, ArrayList<Integer> collection) {
+    
+    /**Helper Method for countOccurencesLetterGrades to setGrades.  */
+    private void setGrades(Map<String, Integer> occur, List<Integer> collection) {
         
         for (double value : collection) {
-            if ((double)value / maxPoints * 100 > 89.0) {
+            if (value / maxPoints * 100 > 89.0) {
                 occur.put("A", occur.get("A") + 1);
-            } else if ((double)value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
+            } else if (value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
                 occur.put("B", occur.get("B") + 1);
-            } else if ((double)value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
+            } else if (value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
                 occur.put("C", occur.get("C") + 1);
-            } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
+            } else if (value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
                 occur.put("D", occur.get("D") + 1);
             } else {
                 occur.put("F", occur.get("F") + 1);
             }
-        }
-        
+        }      
     }
+    
 
     /**
      * This will be needed for assignment 3 (do not change in assignment 2)
@@ -321,27 +320,27 @@ public class Course {
         System.out.println("The curve will be: " + curveAdded + "pts.");
 
         for (double value : collection) {
-            if ((((double) value / maxPoints * 100) + curveAdded) > 89.0) {
+            if (((value / maxPoints * 100) + curveAdded) > 89.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
                         curve.put(students.get(i).getAsurite() + ": ", "A");
                     }
                 }
-            } else if ((((double) value / maxPoints * 100) + curveAdded) > 79.0
+            } else if (((value / maxPoints * 100) + curveAdded) > 79.0
                     && ((value / maxPoints) + curveAdded) <= 89.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
                         curve.put(students.get(i).getAsurite() + ": ", "B");
                     }
                 }
-            } else if ((((double) value / maxPoints * 100) + curveAdded) > 59.0
+            } else if (((value / maxPoints * 100) + curveAdded) > 59.0
                     && ((value / maxPoints) + curveAdded) < 80.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
                         curve.put(students.get(i).getAsurite() + ": ", "C");
                     }
                 }
-            } else if ((((double) value / maxPoints * 100) + curveAdded) > 35.0
+            } else if (((value / maxPoints * 100) + curveAdded) > 35.0
                     && ((value / maxPoints) + curveAdded) <= 59.0) {
                 for (int i = 0; i < students.size(); i++) {
                     if (getStudent_Points(students.get(i)) == value) {
@@ -358,5 +357,4 @@ public class Course {
         }
         return curve;
     }
-
 }
