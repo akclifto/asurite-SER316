@@ -13,7 +13,7 @@ public class Main {
     /**JavaDoc Comments for main method.  sets up students and courses 
      * to curve.
      *  */
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
 
         students.put("anna", new Student("anna", Major.valueOf("SER")));
         students.put("karl", new Student("karl", Major.valueOf("CS")));

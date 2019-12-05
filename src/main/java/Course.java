@@ -280,7 +280,7 @@ public class Course {
      * @return hashmap with final letter grades for students based on curving `points`.
      * @throws NullPointerException if Map is null.
      */
-    public Map<String, String> curveLetterGrades() throws NullPointerException, IOException { 
+    public Map<String, String> curveLetterGrades() throws IOException { 
 
         HashMap<String, String> curve = new HashMap<>();
 
