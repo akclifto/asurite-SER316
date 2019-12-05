@@ -78,7 +78,8 @@ public class Student {
     }
     
     
-    public boolean checkFault(Object other) {
+    /**Helper method for equals(Object Other. */
+    private boolean checkFault(Object other) {
         
         if (other == this) {
             return true;

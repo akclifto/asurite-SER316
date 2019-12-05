@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,7 +22,7 @@ public class GivenWhiteBox {
         oneStudent = new Course("SER316");
         oneStudent.set_points("Hanna", 85);
         oneStudent.set_points("Tanja", 100);
-        HashMap<String, Integer> ans = oneStudent.countOccurencesLetterGrades(false);
+        Map<String, Integer> ans = oneStudent.countOccurencesLetterGrades(false);
         assertTrue(ans.get("A") == 1);
         assertTrue(ans.get("B") == 1);
         assertTrue(ans.get("C") == 0);

@@ -149,7 +149,7 @@ public class Course {
      * @param collection of students and points for a course.
      * @return list of percentiles for a course.
      * @throws NullPointerException if collection is null. */
-    public ArrayList<Double> calculatePercentiles(ArrayList<Integer> collection) 
+    public List<Double> calculatePercentiles(List<Integer> collection) 
             throws NullPointerException {
 
         if (collection == null) {
@@ -216,10 +216,10 @@ public class Course {
      * @throws NullPointerException if HashMap occur is null.
      * @throws IOException if negative grades detected in curveLetterGrades().
      */
-    public HashMap<String, Integer> countOccurencesLetterGrades(boolean curved)
+    public Map<String, Integer> countOccurencesLetterGrades(boolean curved)
             throws NullPointerException, IOException {
 
-        HashMap<String, Integer> occur = new HashMap<String, Integer>();
+        Map<String, Integer> occur = new HashMap<String, Integer>();
         occur.put("A", 0);
         occur.put("B", 0);
         occur.put("C", 0);
@@ -232,19 +232,8 @@ public class Course {
                 throw new NullPointerException();
             }
 
-            for (double value : collection) {
-                if ((double)value / maxPoints * 100 > 89.0) {
-                    occur.put("A", occur.get("A") + 1);
-                } else if ((double)value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
-                    occur.put("B", occur.get("B") + 1);
-                } else if ((double)value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
-                    occur.put("C", occur.get("C") + 1);
-                } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
-                    occur.put("D", occur.get("D") + 1);
-                } else {
-                    occur.put("F", occur.get("F") + 1);
-                }
-            }
+            setGrade(occur, collection);
+            
         } else {
             for (String grade : curveLetterGrades().values()) {
                 //SER316-start
@@ -255,6 +244,29 @@ public class Course {
         }
         return occur;
 
+    }
+    
+    /**Method:  Sets grades for countOccurencesLetterGrades.
+     * Inputs: occur : Map, collection : ArrayList
+     * 
+     * <p>Description: helper method to set grades for countOccurencesLetterGrades.
+     *  */
+    private void setGrade(Map<String, Integer> occur, ArrayList<Integer> collection) {
+        
+        for (double value : collection) {
+            if ((double)value / maxPoints * 100 > 89.0) {
+                occur.put("A", occur.get("A") + 1);
+            } else if ((double)value / maxPoints * 100 > 79.0 && value / maxPoints <= 89.0) {
+                occur.put("B", occur.get("B") + 1);
+            } else if ((double)value / maxPoints * 100 > 50.0 && value / maxPoints <= 65) {
+                occur.put("C", occur.get("C") + 1);
+            } else if ((double) value / maxPoints * 100 > 35.0 && value / maxPoints <= 50.0) {
+                occur.put("D", occur.get("D") + 1);
+            } else {
+                occur.put("F", occur.get("F") + 1);
+            }
+        }
+        
     }
 
     /**
