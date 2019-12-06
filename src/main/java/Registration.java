@@ -8,7 +8,7 @@ public class Registration {
     private Student student;
     private Course course;
     private double grade;
-    private List<Registration> regList = new ArrayList<>();   
+//    private List<Registration> regList = new ArrayList<>();   
     
     
     public Registration() {
@@ -36,22 +36,17 @@ public class Registration {
         return course;
     }
     
-    public Registration newRegister(String name, Course couse) {
-        
-        if (regList.size() == 0) {
-            Student student = new Student(name, null);
-            return new Registration(student, course);
-        }
-        
-        for (int i = 0; i < regList.size(); i++) {
-            if (regList.get(i).getStudent().getAsurite().equals(name)) {
-                System.out.println("Student already registered for course.");
-            } else {
-                Student student = new Student(name, null);
-                return new Registration(student, course);
-            }
-        }
-        return null;
-    }   
+//    public void newRegister(String name, Course couse) {
+//        
+//        for (int i = 0; i < regList.size(); i++) {
+//                 
+//            if (regList.get(i).getStudent().getAsurite().equals(name)) {
+//                System.out.println("Student already registered for course.");
+//            } else {
+//                Student student = new Student(name, null);
+//                new Registration(this.student, this.course);
+//            }
+//        }
+//    }   
 
 }
