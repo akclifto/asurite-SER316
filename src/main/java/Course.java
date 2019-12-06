@@ -51,9 +51,9 @@ public class Course {
         return students;
     }
    
-   public void regStudent(String name, Course course) {
-       reg.newRegister(name, course);
-   }
+//   public void regStudent(String name, Course course) {
+//       reg.newRegister(name, course);
+//   }
 
     /**set_points sets an amount of points to a student.
      * @param name String is the students name or asurite id in a string.
