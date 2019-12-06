@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    
+    
     static Map<String, Student> students = new HashMap<>();
     //change to one that works with happy day case
     static Map<String, CourseGrades0> courses = new HashMap<>();

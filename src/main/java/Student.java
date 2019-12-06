@@ -10,6 +10,7 @@ public class Student {
     private Major major;
     private double overallGrade;
     private List<Course> courses = new ArrayList<Course>();
+    private Registration reg;
     
     /**Ctor for Student:  set asurite, major and overall grade.
      * @param asurite student id
