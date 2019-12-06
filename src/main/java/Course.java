@@ -15,7 +15,7 @@ public class Course {
 
     // maps student names (asurite) to their points
     public HashMap<String, Integer> points = new HashMap<>(); 
-    private Registration reg;
+    // private Registration reg;
     private String name; // course name
     private int maxPoints;
     private ArrayList<Student> students = new ArrayList<Student>();
@@ -28,7 +28,7 @@ public class Course {
     public Course(String name, int maxPoints) {
         this.setName(name);
         this.maxPoints = maxPoints;
-        reg = new Registration();
+        // reg = new Registration();
     }
 
     public String getName() {
